@@ -2,5 +2,5 @@
 
 void InitializeAll(){
 
-    InitWindow(screenWidth, screenHeight, windowTitle);
+    InitWindow(screenWidth, screenHeight, pogi);
 }
