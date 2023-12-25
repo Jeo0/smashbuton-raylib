@@ -11,11 +11,12 @@ endif
 
 
 default:
-	g++ "../src/*.cpp" -o main.exe\
+	g++ "src/*.cpp" -o build/main.exe\
 		$(CFLAGS) \
-		-I ../include \
-		-L ../lib \
+		-I include \
+		-L lib \
 		$(LINKFLAGS)
+	./build/main.exe
 # -I D:\dev\gui\raylib\raylib\raylib\src 
 #  default g++ folder
 #  C:\ProgramData\mInGw64\1.20\w64devkit\bin
