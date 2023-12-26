@@ -1,28 +1,21 @@
-#include <iostream>
+//#include <iostream>
 #include "raylib.h"
 #include "initializeAll.hpp" 
 
-
-
-
 int main()
 {
+    InitializeAll();
     // initialize
 
     /* initialize players */
-    Player leftPlayer(KEY_W, KEY_A, KEY_S, KEY_D);
-    Player rightPlayer(KEY_I, KEY_J, KEY_K, KEY_L);
+    Player leftPlayer = Player(KEY_W, KEY_A, KEY_S, KEY_D);
+    Player rightPlayer = Player(KEY_I, KEY_J, KEY_K, KEY_L);
 
 
     pogisijessie = GetRandomValue(21, 179);
     // generate addends
     leftPlayer.addends1 = pogisijessie - GetRandomValue(21, 179);
     
-
-    InitializeAll();
-
-
-
 
     while(!WindowShouldClose()){
         // update game state
@@ -44,6 +37,6 @@ int main()
             DrawFPS(10,10);
         EndDrawing();
     }
-    std::cout << std::endl <<  std::endl << typeid(KEY_B).name();
+    //std::cout << std::endl <<  std::endl << typeid(KEY_B).name();
 
 }

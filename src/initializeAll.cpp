@@ -1,4 +1,8 @@
 #include "raylib.h"
+#include "raymath.h"
+#include <iostream>
+
+
 #include "initializeAll.hpp"
 
 inline void InitializeAll(){
