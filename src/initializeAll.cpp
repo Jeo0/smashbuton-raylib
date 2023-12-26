@@ -16,15 +16,15 @@ void InitializeAll(){
     // generate addends
     leftPlayer.addends1 = pogisijessie - GetRandomValue(MINPOGISIJESSIE+1, pogisijessie);
     leftPlayer.addends2 = pogisijessie - leftPlayer.addends1;
-    leftPlayer.useless1 = pogisijessie - GetRandomValue(MINPOGISIJESSIE+1, pogisijessie) + GetRandomValue(MINPOGISIJESSIE+1, pogisijessie);
-    leftPlayer.useless2 = GetRandomValue(leftPlayer.addends1-MINPOGISIJESSIE, leftPlayer.addends2+MAXPOGISIJESSIE);
-    /*
+    leftPlayer.useless1 = GetRandomValue(leftPlayer.addends1, leftPlayer.addends2);
+    leftPlayer.useless2 = GetRandomValue(leftPlayer.addends1, leftPlayer.addends2);
+            DrawText(TextFormat("index 0: %i", larray[0]), GetScreenWidth()/2, GetScreenHeight() * 0.9, 36, ORANGE);
+            DrawText(TextFormat("index 1: %i", larray[1]), GetScreenWidth()/2, GetScreenHeight() * 0.95, 36, ORANGE);
     std::cout << "\n\n\npogisijessie " << pogisijessie;
     std::cout << "\n\n\naddends1 " << leftPlayer.addends1;
     std::cout << "\n\n\naddends2 " << leftPlayer.addends2;
     std::cout << "\n\n\nuseless1 " << leftPlayer.useless1;
     std::cout << "\n\n\nuseless2 " << leftPlayer.useless2;
-    */
 
 
     SetTargetFPS(30);

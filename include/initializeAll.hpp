@@ -14,6 +14,7 @@ inline bool pause;
 inline uint pogisijessie;
 
 void InitializeAll();
+void DrawOptions();
 
 class Player{
 public:

@@ -9,13 +9,13 @@ int main()
     bool matchFlag = false;
     bool lkey1 = false, lkey2 = false, lkey3 = false, lkey4 = false;
     bool larray[2] = {};
-    bool flush = false;
     uint index = 0;
 
     while(!WindowShouldClose()){
         
         if(IsKeyPressed(KEY_SPACE)){
             pause = !pause;
+            matchFlag = false;
         }
         if(!pause){
             // update game state
@@ -35,11 +35,11 @@ int main()
             }
 
 
-            // record
-            if(lkey1) larray[index] = lkey1;
-            if(lkey2) larray[index] = lkey2;
-            if(lkey3) larray[index] = lkey3;
-            if(lkey4) larray[index] = lkey4;
+            // record if key is pressed AND if the values in the record will equate to the pogisijessie
+            if(lkey1 && (pogisijessie - leftPlayer.addends1 == leftPlayer.addends2)) larray[index] = lkey1;
+            if(lkey2 && (pogisijessie - leftPlayer.addends2 == leftPlayer.addends1)) larray[index] = lkey2;
+            if(lkey3 && (pogisijessie - leftPlayer.useless1 == leftPlayer.useless2)) larray[index] = lkey3;
+            if(lkey4 && (pogisijessie - leftPlayer.useless2 == leftPlayer.useless1)) larray[index] = lkey4;
             if(lkey1 || lkey2 || lkey3 || lkey4) index++;
 
 
@@ -48,6 +48,7 @@ int main()
                 matchFlag = true;
                 leftPlayer.point++;
             }
+            DrawOptions();
             DrawText(TextFormat("index 0: %i", larray[0]), GetScreenWidth()/2, GetScreenHeight() * 0.9, 36, ORANGE);
             DrawText(TextFormat("index 1: %i", larray[1]), GetScreenWidth()/2, GetScreenHeight() * 0.95, 36, ORANGE);
 
@@ -59,22 +60,25 @@ int main()
         BeginDrawing();
             ClearBackground(WHITE);         /* start from a white background */
 
-            // show options
+            // show key inputs when pressed
             if(lkey1) DrawText("w", 50, 50, 50, BLUE);
             if(lkey2) DrawText("a", 35, 75, 50, BLUE);
             if(lkey3) DrawText("s", 50, 75, 50, BLUE);
             if(lkey4) DrawText("d", 75, 75, 50, BLUE);
 
             // match point
-            if(larray[0] && larray[1]){
-                matchFlag = true;
-                leftPlayer.point++;
-            }
-            else pause = false;
+            /* if match is end; do pause
+            */
+            //if(matchFlag){
+                //pause = true;
+            //}
             
             if(pause)
                 DrawText("pause", GetScreenWidth()/2, GetScreenHeight()/2, (screenHeight/2) * 0.4, BLACK   );
+
+            /* if match is done, pause */
             if(matchFlag){
+                pause = true;
                 DrawText(TextFormat("%i : %i", leftPlayer.point, rightPlayer.point), GetScreenWidth()/2, GetScreenHeight() * 0.25, 50, ORANGE);
 
                 DrawFPS(10,10);

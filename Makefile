@@ -11,22 +11,22 @@ endif
 
 
 #linux:
-default:
-	g++ "src/*.cpp" -o build/main.out\
-		$(CFLAGS) \
-		-I include \
-		-L lib \
-		$(LINKFLAGS)
-	./build/main.exe
-
-# windows
 #default:
-	#g++ "src/*.cpp" -o build/main.exe\
+	#g++ "src/*.cpp" -o build/main.out\
 		$(CFLAGS) \
 		-I include \
 		-L lib \
 		$(LINKFLAGS)
 	#./build/main.exe
+
+# windows
+default:
+	g++ "src/*.cpp" -o build/main.exe\
+		$(CFLAGS) \
+		-I include \
+		-L lib \
+		$(LINKFLAGS)
+	./build/main.exe
 run:
 	./build/main.exe
 
