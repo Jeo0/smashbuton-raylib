@@ -32,6 +32,7 @@ void InitializeAll(){
     /* game state variables*/
     pause = false;
     leftPlayer.point = 0;
+    rightPlayer.point = 0;
 
 
 }
