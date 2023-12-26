@@ -1,31 +1,51 @@
-//#include <iostream>
+#include <iostream>
 #include "raylib.h"
 #include "initializeAll.hpp" 
 
 int main()
 {
-    InitializeAll();
     // initialize
-
-   
+    InitializeAll();
+    bool matchFlag = false;
+    bool lkey1 = false, lkey2 = false, lkey3 = false, lkey4 = false;
 
     while(!WindowShouldClose()){
-        // update game state
-
+        
         if(IsKeyPressed(KEY_SPACE)){
-            space = !space;
+            pause = !pause;
         }
+        if(!pause){
+            // update game state
+            lkey1 = false; lkey2 = false; lkey3 =  false; lkey4 = false;
+            if (IsKeyDown(leftPlayer.key1)) lkey1 = true;
+            if (IsKeyDown(leftPlayer.key2)) lkey2 = true;
+            if (IsKeyDown(leftPlayer.key3)) lkey3 = true;
+            if (IsKeyDown(leftPlayer.key4)) lkey4 = true;
+        }
+
+
 
         // draw game
         BeginDrawing();
             ClearBackground(WHITE);         /* start from a white background */
 
+            // show options
+            if(lkey1) DrawText("w", 50, 50, 50, BLUE);
+            if(lkey2) DrawText("a", 35, 75, 50, BLUE);
+            if(lkey3) DrawText("s", 50, 75, 50, BLUE);
+            if(lkey4) DrawText("d", 75, 75, 50, BLUE);
 
-
+            // match point
+            if(lkey2 && lkey1){
+                pause = true;
+                leftPlayer.point++;
+            }
+            else pause = false;
             
-            if(space)
-                DrawText("i am spaced", GetScreenWidth()/2, GetScreenHeight()/2, (screenHeight/2) * 0.4, BLACK   );
-
+            if(pause)
+                DrawText("pause", GetScreenWidth()/2, GetScreenHeight()/2, (screenHeight/2) * 0.4, BLACK   );
+            
+            DrawText(TextFormat("%i", leftPlayer.point), 100, 100, 50, ORANGE);
             DrawFPS(10,10);
         EndDrawing();
     }

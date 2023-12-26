@@ -5,23 +5,33 @@
 
 #include "initializeAll.hpp"
 
+
 void InitializeAll(){
 
     InitWindow(screenWidth, screenHeight, pogi);
      /* initialize players */
-    Player leftPlayer = Player(KEY_W, KEY_A, KEY_S, KEY_D);
-    Player rightPlayer = Player(KEY_I, KEY_J, KEY_K, KEY_L);
 
 
-    pogisijessie = GetRandomValue(21, 179);
+    pogisijessie = GetRandomValue(MINPOGISIJESSIE, MAXPOGISIJESSIE);
     // generate addends
-    leftPlayer.addends1 = pogisijessie - GetRandomValue(21, 179);
-    
+    leftPlayer.addends1 = pogisijessie - GetRandomValue(MINPOGISIJESSIE+1, pogisijessie);
+    leftPlayer.addends2 = pogisijessie - leftPlayer.addends1;
+    leftPlayer.useless1 = pogisijessie - GetRandomValue(MINPOGISIJESSIE+1, pogisijessie) + GetRandomValue(MINPOGISIJESSIE+1, pogisijessie);
+    leftPlayer.useless2 = GetRandomValue(leftPlayer.addends1-MINPOGISIJESSIE, leftPlayer.addends2+MAXPOGISIJESSIE);
+    /*
+    std::cout << "\n\n\npogisijessie " << pogisijessie;
+    std::cout << "\n\n\naddends1 " << leftPlayer.addends1;
+    std::cout << "\n\n\naddends2 " << leftPlayer.addends2;
+    std::cout << "\n\n\nuseless1 " << leftPlayer.useless1;
+    std::cout << "\n\n\nuseless2 " << leftPlayer.useless2;
+    */
 
-    SetTargetFPS(10);
+
+    SetTargetFPS(30);
 
     /* game state variables*/
-    space = false;
+    pause = false;
+    leftPlayer.point = 0;
 
 
 }
@@ -29,8 +39,8 @@ void InitializeAll(){
 // definition
 Player::Player(uint one, uint two, uint three, uint four){
     // randomize
-    addends1 = one; 
-    addends2 = two; 
-    useless1 = three; 
-    useless2 = four;
+    key1 = one; 
+    key2 = two; 
+    key3 = three; 
+    key4 = four;
 }

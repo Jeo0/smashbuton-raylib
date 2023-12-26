@@ -1,0 +1,40 @@
+
+ready players:
+
+
+
+
+
+loop:
+cooldown mode:
+	[] random show POGISIJESSIE
+	[] delay 1 second
+	[] cls
+	
+	[] generate 2 random numbers that will equate to POGISIJESSIE
+		- lets call these 2 numbers as ADDENDS1, ADDENDS2
+	[] generate 2 random numbers that will not equate to POGISIJESSIE
+		- lets call these 2 numbers as USELESS1, USELESS2
+
+	[] bind ADDENDS1&2 to keys of left&right
+	[] bind USELESS1&2 to keys of left&right
+
+
+showdownd mode:
+	
+	[] show ADDENDS1, ADDENDS2, USELESS1, USELESS2
+	[] bind these shits to qwer, and uiop
+
+	loop until end is round:
+		[] keystroke input into array
+		[] evaluate the array if EITHER OF THE PLAYERS made the right combination:
+			[] add 1 point to the winner
+			[] end the round
+		
+		[] else, continue inputting
+	
+	[] show sino nanalo
+
+
+rewarding mode:
+	[] show who has the highest points

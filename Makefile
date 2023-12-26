@@ -17,6 +17,10 @@ default:
 		-L lib \
 		$(LINKFLAGS)
 	./build/main.exe
+
+run:
+	./build/main.exe
+
 # -I D:\dev\gui\raylib\raylib\raylib\src 
 #  default g++ folder
 #  C:\ProgramData\mInGw64\1.20\w64devkit\bin
