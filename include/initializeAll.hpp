@@ -14,15 +14,14 @@ inline bool pause;
 inline uint pogisijessie;
 
 void InitializeAll();
-void DrawOptions();
 
 class Player{
 public:
-    uint pogisijessie;
     uint addends1, addends2, useless1, useless2;
     uint key1, key2, key3, key4;
     uint point;
     Player(uint one, uint two, uint three, uint four);
+    void DrawOptions();
 };
 
 inline Player leftPlayer = Player(KEY_W, KEY_A, KEY_S, KEY_D);

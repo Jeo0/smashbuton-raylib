@@ -35,7 +35,8 @@ int main()
             }
 
 
-            // record if key is pressed AND if the values in the record will equate to the pogisijessie
+            // record if key is pressed 
+            // AND if the values in the record will equate to the pogisijessie
             if(lkey1 && (pogisijessie - leftPlayer.addends1 == leftPlayer.addends2)) larray[index] = lkey1;
             if(lkey2 && (pogisijessie - leftPlayer.addends2 == leftPlayer.addends1)) larray[index] = lkey2;
             if(lkey3 && (pogisijessie - leftPlayer.useless1 == leftPlayer.useless2)) larray[index] = lkey3;
@@ -48,7 +49,6 @@ int main()
                 matchFlag = true;
                 leftPlayer.point++;
             }
-            DrawOptions();
             DrawText(TextFormat("index 0: %i", larray[0]), GetScreenWidth()/2, GetScreenHeight() * 0.9, 36, ORANGE);
             DrawText(TextFormat("index 1: %i", larray[1]), GetScreenWidth()/2, GetScreenHeight() * 0.95, 36, ORANGE);
 
@@ -66,6 +66,7 @@ int main()
             if(lkey3) DrawText("s", 50, 75, 50, BLUE);
             if(lkey4) DrawText("d", 75, 75, 50, BLUE);
 
+            leftPlayer.DrawOptions();
             // match point
             /* if match is end; do pause
             */
