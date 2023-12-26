@@ -5,7 +5,7 @@
 
 #include "initializeAll.hpp"
 
-inline void InitializeAll(){
+void InitializeAll(){
 
     InitWindow(screenWidth, screenHeight, pogi);
 
