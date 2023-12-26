@@ -8,7 +8,15 @@
 void InitializeAll(){
 
     InitWindow(screenWidth, screenHeight, pogi);
+     /* initialize players */
+    Player leftPlayer = Player(KEY_W, KEY_A, KEY_S, KEY_D);
+    Player rightPlayer = Player(KEY_I, KEY_J, KEY_K, KEY_L);
 
+
+    pogisijessie = GetRandomValue(21, 179);
+    // generate addends
+    leftPlayer.addends1 = pogisijessie - GetRandomValue(21, 179);
+    
 
     SetTargetFPS(10);
 
