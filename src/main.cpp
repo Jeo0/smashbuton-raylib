@@ -8,7 +8,9 @@ int main()
     InitializeAll();
     bool matchFlag = false;
     bool lkey1 = false, lkey2 = false, lkey3 = false, lkey4 = false;
-    bool rkey1 = false, rkey2 = false, rkey3 =  false, rkey4 = false;
+    bool larray[2] = {};
+    bool flush = false;
+    uint index = 0;
 
     while(!WindowShouldClose()){
         
@@ -18,16 +20,37 @@ int main()
         if(!pause){
             // update game state
             lkey1 = false; lkey2 = false; lkey3 =  false; lkey4 = false;
-            if (IsKeyDown(leftPlayer.key1)) lkey1 = true;
-            if (IsKeyDown(leftPlayer.key2)) lkey2 = true;
-            if (IsKeyDown(leftPlayer.key3)) lkey3 = true;
-            if (IsKeyDown(leftPlayer.key4)) lkey4 = true;
-            
-            rkey1 = false; rkey2 = false; rkey3 =  false; rkey4 = false;
-            if (IsKeyDown(rightPlayer.key1)) rkey1 = true;
-            if (IsKeyDown(rightPlayer.key2)) rkey2 = true;
-            if (IsKeyDown(rightPlayer.key3)) rkey3 = true;
-            if (IsKeyDown(rightPlayer.key4)) rkey4 = true;
+            if (IsKeyPressed(leftPlayer.key1)) lkey1 = true; 
+            if (IsKeyPressed(leftPlayer.key2)) lkey2 = true;
+            if (IsKeyPressed(leftPlayer.key3)) lkey3 = true;
+            if (IsKeyPressed(leftPlayer.key4)) lkey4 = true;
+
+
+            /* flush*/
+            if(index>=2){
+                index = 0;
+                larray[0] = false;
+                larray[1] = false;
+                
+            }
+
+
+            // record
+            if(lkey1) larray[index] = lkey1;
+            if(lkey2) larray[index] = lkey2;
+            if(lkey3) larray[index] = lkey3;
+            if(lkey4) larray[index] = lkey4;
+            if(lkey1 || lkey2 || lkey3 || lkey4) index++;
+
+
+            // evaluate
+            if(larray[0] && larray[1]){
+                matchFlag = true;
+                leftPlayer.point++;
+            }
+            DrawText(TextFormat("index 0: %i", larray[0]), GetScreenWidth()/2, GetScreenHeight() * 0.9, 36, ORANGE);
+            DrawText(TextFormat("index 1: %i", larray[1]), GetScreenWidth()/2, GetScreenHeight() * 0.95, 36, ORANGE);
+
         }
 
 
@@ -42,18 +65,10 @@ int main()
             if(lkey3) DrawText("s", 50, 75, 50, BLUE);
             if(lkey4) DrawText("d", 75, 75, 50, BLUE);
 
-            if(rkey1) DrawText("i", 50+50, 50+50, 50, BLUE);
-            if(rkey2) DrawText("j", 35+50, 75+50, 50, BLUE);
-            if(rkey3) DrawText("k", 50+50, 75+50, 50, BLUE);
-            if(rkey4) DrawText("l", 75+50, 75+50, 50, BLUE);
             // match point
-            if(lkey2 && lkey1){
+            if(larray[0] && larray[1]){
                 matchFlag = true;
                 leftPlayer.point++;
-            }
-            else if(rkey2 && rkey1){
-                matchFlag = true;
-                rightPlayer.point++;
             }
             else pause = false;
             
@@ -62,9 +77,9 @@ int main()
             if(matchFlag){
                 DrawText(TextFormat("%i : %i", leftPlayer.point, rightPlayer.point), GetScreenWidth()/2, GetScreenHeight() * 0.25, 50, ORANGE);
 
-            DrawFPS(10,10);
-        EndDrawing();
-        continue;
+                DrawFPS(10,10);
+                EndDrawing();
+                continue;
             }
             
             
