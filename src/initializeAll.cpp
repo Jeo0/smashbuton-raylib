@@ -8,11 +8,9 @@
 
 void InitializeAll(){
 
-    InitWindow(screenWidth, screenHeight, pogi);
      /* initialize players */
 
-
-    pogisijessie = GetRandomValue(MINPOGISIJESSIE, MAXPOGISIJESSIE);
+    GenerateNew_pogisijessie();
     // generate addends
     leftPlayer.addends1 = pogisijessie - GetRandomValue(MINPOGISIJESSIE+1, pogisijessie);
     leftPlayer.addends2 = pogisijessie - leftPlayer.addends1;
@@ -52,4 +50,9 @@ void Player::DrawOptions(){
     DrawText(TextFormat("a: %i", leftPlayer.addends2), 100, GetScreenHeight() * 0.4, 50, ORANGE);
     DrawText(TextFormat("s: %i", leftPlayer.useless1), 100, GetScreenHeight() * 0.6, 50, ORANGE);
     DrawText(TextFormat("d: %i", leftPlayer.useless2), 100, GetScreenHeight() * 0.8, 50, ORANGE);
+}
+
+uint GenerateNew_pogisijessie(){
+    pogisijessie = GetRandomValue(MINPOGISIJESSIE, MAXPOGISIJESSIE);
+    return pogisijessie;
 }

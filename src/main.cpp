@@ -5,10 +5,13 @@
 int main()
 {
     // initialize
+    InitWindow(screenWidth, screenHeight, pogi);
     InitializeAll();
     bool matchFlag = false;
-    bool lkey1 = false, lkey2 = false, lkey3 = false, lkey4 = false;
-    bool larray[2] = {};
+    uint lkey1=0, lkey2=0, lkey3=0, lkey4=0;
+    //bool blkey1 = false,blkey2 = false,blkey3 = false,blkey4 = false;
+    // bool larray[2] = {};
+    uint larray[2] = {};
     uint index = 0;
 
     while(!WindowShouldClose()){
@@ -19,33 +22,64 @@ int main()
         }
         if(!pause){
             // update game state
-            lkey1 = false; lkey2 = false; lkey3 =  false; lkey4 = false;
-            if (IsKeyPressed(leftPlayer.key1)) lkey1 = true; 
-            if (IsKeyPressed(leftPlayer.key2)) lkey2 = true;
-            if (IsKeyPressed(leftPlayer.key3)) lkey3 = true;
-            if (IsKeyPressed(leftPlayer.key4)) lkey4 = true;
+            // bind the keyboard input into a value
+            /* ------------------------- TODO: make these bindings random -------------------------*/
+            /*
+            blkey1 = false; blkey2 = false; blkey3 =  false; blkey4 = false;
+            if (IsKeyPressed(leftPlayer.key1)) blkey1 = true; 
+            if (IsKeyPressed(leftPlayer.key2)) blkey2 = true;
+            if (IsKeyPressed(leftPlayer.key3)) blkey3 = true;
+            if (IsKeyPressed(leftPlayer.key4)) blkey4 = true;
+            */
+           lkey1=0;lkey2=0;lkey3=0;lkey4=0;
+           if(IsKeyPressed(leftPlayer.key1)) lkey1 = leftPlayer.addends1;
+           if(IsKeyPressed(leftPlayer.key2)) lkey2 = leftPlayer.addends2;
+           if(IsKeyPressed(leftPlayer.key3)) lkey3 = leftPlayer.useless1;
+           if(IsKeyPressed(leftPlayer.key4)) lkey4 = leftPlayer.useless2;
+
 
 
             /* flush*/
             if(index>=2){
                 index = 0;
+                /*
                 larray[0] = false;
                 larray[1] = false;
+                */
+                larray[0] = 0;
+                larray[1] = 0;
                 
             }
 
 
             // record if key is pressed 
             // AND if the values in the record will equate to the pogisijessie
-            if(lkey1 && (pogisijessie - leftPlayer.addends1 == leftPlayer.addends2)) larray[index] = lkey1;
-            if(lkey2 && (pogisijessie - leftPlayer.addends2 == leftPlayer.addends1)) larray[index] = lkey2;
-            if(lkey3 && (pogisijessie - leftPlayer.useless1 == leftPlayer.useless2)) larray[index] = lkey3;
-            if(lkey4 && (pogisijessie - leftPlayer.useless2 == leftPlayer.useless1)) larray[index] = lkey4;
+            // and if the previous key is not the same key pressed
+            /* using boolean
+            if(blkey1 && (pogisijessie - leftPlayer.addends1 == leftPlayer.addends2)) larray[index] = blkey1;
+            if(blkey2 && (pogisijessie - leftPlayer.addends2 == leftPlayer.addends1)) larray[index] = blkey2;
+            if(blkey3 && (pogisijessie - leftPlayer.useless1 == leftPlayer.useless2)) larray[index] = blkey3;
+            if(blkey4 && (pogisijessie - leftPlayer.useless2 == leftPlayer.useless1)) larray[index] = blkey4;
             if(lkey1 || lkey2 || lkey3 || lkey4) index++;
+            */
+            // using values
+            if(lkey1 && lkey1 != larray[0]) {
+                larray[index] = lkey1; 
+                index++;}
+            if(lkey2 && lkey2 != larray[0]) {
+                larray[index] = lkey2;
+                index++;}
+            if(lkey3 && lkey3 != larray[0]) {
+                larray[index] = lkey3;
+                index++;}
+            if(lkey4 && lkey4 != larray[0]) {
+                larray[index] = lkey4;
+                index++;}
 
 
             // evaluate
-            if(larray[0] && larray[1]){
+            if(larray[0] + larray[1] == pogisijessie){
+            //if(larray[0] && larray[1]){
                 matchFlag = true;
                 leftPlayer.point++;
             }
@@ -82,11 +116,11 @@ int main()
                 pause = true;
                 DrawText(TextFormat("%i : %i", leftPlayer.point, rightPlayer.point), GetScreenWidth()/2, GetScreenHeight() * 0.25, 50, ORANGE);
 
+                InitializeAll();
                 DrawFPS(10,10);
                 EndDrawing();
                 continue;
             }
-            
             
             
             //DrawText(TextFormat("%i", leftPlayer.point), 100, 100, 50, ORANGE);

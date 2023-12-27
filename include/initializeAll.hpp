@@ -12,6 +12,7 @@ typedef unsigned int uint;
 
 inline bool pause;
 inline uint pogisijessie;
+uint GenerateNew_pogisijessie();
 
 void InitializeAll();
 
