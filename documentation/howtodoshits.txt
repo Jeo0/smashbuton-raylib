@@ -1,0 +1,33 @@
+
+how the game works
+	READY MODE:
+		press wasd if player 1 is present
+		press i jk I if player2 is present
+		if both are present, proceed to COOLDOWN MODE
+
+	COOLDOWN MODE:
+		a random number will appear (pls name it POGISIJESSIE)
+		wait for 1.5 seconds
+		clear screen
+	
+	SHOWDOWN MODE:
+		- 8 inputs (wasd for leftPlayer, ijkl for rightPlayer)
+		appear 4 choices for playerl and player2:
+			- 2 choices will equal to POGISIJESSIE if both are added
+			- 2 choices are random
+
+		- remove the inputs in an array
+		- record the inputs in an array with a size of 2 unsigned integers
+		- IF "wrong combination", then dont let the player input anything yet for 0.5 seconds
+		- IF "clashFlag is true", then 
+		- IF "right combination", then minus one health
+		- present the match points after, and then go back to COOLDOWN MODE
+
+
+	REWARDING PHASE:
+	(repeat showdown mode 5 times)
+		show sino nanalo with the highest match points
+
+
+with the current state of the code (check the TODO lists):
+
