@@ -1,6 +1,12 @@
 #include <iostream>
+#include <chrono>
 #include "raylib.h"
 #include "initializeAll.hpp" 
+
+    using std::chrono::high_resolution_clock;
+    using std::chrono::duration_cast;
+    using std::chrono::duration;
+    using std::chrono::milliseconds;
 
 int main()
 {
@@ -13,10 +19,17 @@ int main()
     uint lkey1=0, lkey2=0, lkey3=0, lkey4=0;
     uint larray[2] = {};
     uint index = 0;
-    startTime = GetTime();
-    double timeElapsed = 0;
+    //startTime = GetTime();
+    // initialize starting time 
+    auto t1 = high_resolution_clock::now();
+    auto t2 = high_resolution_clock::now();
+    auto timeElapsed = duration_cast<milliseconds>(t2-t1);
+
+    //auto timeElapsed = 0;
 
     while(!WindowShouldClose()){
+        t2 = high_resolution_clock::now();
+        timeElapsed = duration_cast<milliseconds>(t2-t1);
         
         if(IsKeyPressed(KEY_SPACE)){
             pause = !pause;
@@ -47,16 +60,16 @@ int main()
             // record if key is pressed 
             // AND if the values in the record will equate to the pogisijessie
             // and if the previous key is not the same key pressed
-            if(lkey1 && lkey1 != larray[0]) {
+            if(lkey1 && leftPlayer.key1 != IsKeyPressed(leftPlayer.key1)) {
                 larray[index] = lkey1; 
                 index++;}
-            if(lkey2 && lkey2 != larray[0]) {
+            if(lkey2 && leftPlayer.key2 != IsKeyPressed(leftPlayer.key2)) {
                 larray[index] = lkey2;
                 index++;}
-            if(lkey3 && lkey3 != larray[0]) {
+            if(lkey3 && leftPlayer.key3 != IsKeyPressed(leftPlayer.key3)) {
                 larray[index] = lkey3;
                 index++;}
-            if(lkey4 && lkey4 != larray[0]) {
+            if(lkey4 && leftPlayer.key4 != IsKeyPressed(leftPlayer.key4)) {
                 larray[index] = lkey4;
                 index++;}
 
@@ -81,10 +94,10 @@ int main()
             //DrawText(TextFormat("timeElapsed %i", timeElapsed), GetScreenWidth()*.1, GetScreenHeight() * 0.9, 50, RED);
 
             // show key inputs when pressed
-            if((lkey1 || lkey2 || lkey3 || lkey4) && IsKeyPressed(leftPlayer.original_one)) DrawText("w", 50, 50, 50, BLUE);
-            if((lkey1 || lkey2 || lkey3 || lkey4) && IsKeyPressed(leftPlayer.original_two)) DrawText("a", 35, 75, 50, BLUE);
-            if((lkey1 || lkey2 || lkey3 || lkey4) && IsKeyPressed(leftPlayer.original_three)) DrawText("s", 50, 75, 50, BLUE);
-            if((lkey1 || lkey2 || lkey3 || lkey4) && IsKeyPressed(leftPlayer.original_four)) DrawText("d", 75, 75, 50, BLUE);
+            if((lkey1 || lkey2 || lkey3 || lkey4) && IsKeyPressed(leftPlayer.key1)) DrawText(TextFormat("%c", leftPlayer.key1), 50, 50, 50, BLUE);
+            if((lkey1 || lkey2 || lkey3 || lkey4) && IsKeyPressed(leftPlayer.key2)) DrawText(TextFormat("%c", leftPlayer.key2), 35, 75, 50, BLUE);
+            if((lkey1 || lkey2 || lkey3 || lkey4) && IsKeyPressed(leftPlayer.key3)) DrawText(TextFormat("%c", leftPlayer.key3), 50, 75, 50, BLUE);
+            if((lkey1 || lkey2 || lkey3 || lkey4) && IsKeyPressed(leftPlayer.key4)) DrawText(TextFormat("%c", leftPlayer.key4), 75, 75, 50, BLUE);
 
             // match point
             /* if match is end; do pause */
@@ -98,21 +111,29 @@ int main()
                 DrawText(TextFormat("%i : %i", leftPlayer.point, rightPlayer.point), GetScreenWidth()/2, GetScreenHeight() * 0.25, 50, ORANGE);
 
                 //MatchInitialize();
-                GenerateNew_pogisijessie();
+                pogisijessie = GenerateNew_pogisijessie();
 
                 GenerateNew_numbers();      // generate addends
-                leftPlayer.RandomizeBindings(KEY_W, KEY_A, KEY_S, KEY_D);
+
                 DrawFPS(10,10);
                 EndDrawing();
-                timeElapsed = GetTime() - startTime;
+
                 continue;
             }
+
+            if (timeElapsed.count() >= 1000){
+                t1 = high_resolution_clock::now();                          // new timer
+                //timeElapsed = std::chrono::milliseconds::zero();          // reset the timer to zero
+            }
+
 
             leftPlayer.DrawOptions();
             DrawText(TextFormat("%i : %i", leftPlayer.point, rightPlayer.point), GetScreenWidth() / 2, GetScreenHeight() * 0.25, 50, ORANGE);
             DrawFPS(10, 10);
+            //DrawText(TextFormat("timeElapsed %u", timeElapsed), GetScreenWidth()*.1, GetScreenHeight() * 0.9, 30, RED);
+            //DrawText(TextFormat("t2 %u", t2), GetScreenWidth()*.1, GetScreenHeight() * 0.8, 30, RED);
         EndDrawing();
-        timeElapsed = GetTime() - startTime;
+        //timeElapsed = GetTime() - startTime;
 
     }
 

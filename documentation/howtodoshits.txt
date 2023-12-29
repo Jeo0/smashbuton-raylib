@@ -1,9 +1,13 @@
 
 how the game works
+	intiialize these:
+		- variables (inputs1234)
+		- bool readyMode
+
 	READY MODE:
-		press wasd if player 1 is present
-		press i jk I if player2 is present
-		if both are present, proceed to COOLDOWN MODE
+		press wasd if player 1 is present					== variables (inputs1234)
+		press ijkl I if player2 is present					== variables (inputs1234)
+		if both are present, proceed to COOLDOWN MODE		== bool readyMode
 
 	COOLDOWN MODE:
 		a random number will appear (pls name it POGISIJESSIE)
@@ -31,3 +35,60 @@ how the game works
 
 with the current state of the code (check the TODO lists):
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int main(){
+	initalize_all_varibales();
+
+	draw_thegame(){
+		readyMode();
+		cooldownmode();
+		resultmode();
+	}
+
+	ganto kalinis dapat lmao
+
+}
+
+
+ideally maganda sana kung makasend na kayo ng code na naiintindihan ninyo, base dun sa gameply ng math game
+
+regardless kung ano man ung mga goal natin, gawin nyo parin ung pinapagawa ko sanyo, since magandang review narin to para sa exam
+
+ung tip na sinend kong pseudocode, bery noice solution yon. Pero ung solution ko is based sa flags, instead of recording long arrays of character inputs (i.e., recording the inputs in an array of size 2, and if the flag that the array is full, do reset the values of the array to zero).
+
+for efficiency, ako na gagawa ng lahat basta deserve ninyo ung grade na makukuha ninyo -- kung wala kayong pinakitang effort na intindihin ung codebase, then ndi ko kayo ilalagy sa listahan ng group; and kung meron mang effort kahit papano, carry ko kayo
