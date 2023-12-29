@@ -8,22 +8,22 @@
 
 void InitializeAll(){
 
-    pogisijessie = GenerateNew_pogisijessie();
-    GenerateNew_numbers();      // generate addends
+    gameMatch.GenerateNew_pogisijessie();
+    gameMatch.GenerateNew_numbers();      // generate addends
     SetTargetFPS(50);
 
     /* game state variables*/
     pause = false;
     leftPlayer.point = 0;
     rightPlayer.point = 0;
+    leftPlayer.health = 20;
+    rightPlayer.health = 20;
 
 }
 
 // definition
 Player::Player(uint one, uint two, uint three, uint four){
     // randomize
-    //RandomizeBindings(one, two, three, four);
-    //RandomizeNumbers(key1, key2, key3, key4);
     key1 = one;
     key2 = two;
     key3 = three;
@@ -34,7 +34,6 @@ Player::Player(uint one, uint two, uint three, uint four){
 void Player::RandomizeBindings(uint one, uint two, uint three, uint four){
     uint arrayOfInputs[4] = {one, two, three, four};
 
-    //srand( GetRandomValue(0, 120) );
     for (int i = 3; i > 0; i--)
     {
 
@@ -66,38 +65,31 @@ void Player::RandomizeNumbers(uint add1, uint add2, uint sls1, uint sls2){
 }
 
 void Player::DrawOptions(){
-    /*
-    DrawText(TextFormat("%c: %i", leftPlayer.key1, leftPlayer.addends1), 100, GetScreenHeight() * 0.2, 50, ORANGE);
-    DrawText(TextFormat("%c: %i", leftPlayer.key2, leftPlayer.addends2), 100, GetScreenHeight() * 0.4, 50, ORANGE);
-    DrawText(TextFormat("%c: %i", leftPlayer.key3, leftPlayer.useless1), 100, GetScreenHeight() * 0.6, 50, ORANGE);
-    DrawText(TextFormat("%c: %i", leftPlayer.key4, leftPlayer.useless2), 100, GetScreenHeight() * 0.8, 50, ORANGE);
-    */
-
-    DrawText(TextFormat("w: %i", addends1), 100, GetScreenHeight() * 0.2, 50, ORANGE);
-    DrawText(TextFormat("a: %i", addends2), 100, GetScreenHeight() * 0.4, 50, ORANGE);
-    DrawText(TextFormat("s: %i", useless1), 100, GetScreenHeight() * 0.6, 50, ORANGE);
-    DrawText(TextFormat("d: %i", useless2), 100, GetScreenHeight() * 0.8, 50, ORANGE);
+    DrawText(TextFormat("%c: %i", key1, addends1), 100, GetScreenHeight() * 0.2, 50, ORANGE);
+    DrawText(TextFormat("%c: %i", key2, addends2), 100, GetScreenHeight() * 0.4, 50, ORANGE);
+    DrawText(TextFormat("%c: %i", key3, useless1), 100, GetScreenHeight() * 0.6, 50, ORANGE);
+    DrawText(TextFormat("%c: %i", key4, useless2), 100, GetScreenHeight() * 0.8, 50, ORANGE);
 }
 
-uint GenerateNew_pogisijessie(){
-    uint what = GetRandomValue(MINPOGISIJESSIE, MAXPOGISIJESSIE);
-    return what;
+void GameMatch::GenerateNew_pogisijessie(){
+    pogisijessie = GetRandomValue(MINPOGISIJESSIE, MAXPOGISIJESSIE);
 }
 
-void GenerateNew_numbers(){
+void GameMatch::GenerateNew_numbers(){
     // generate numbers
-    leftPlayer.addends1 = pogisijessie - GetRandomValue(MINPOGISIJESSIE+1, pogisijessie);
+    leftPlayer.addends1 = pogisijessie - GetRandomValue(MINPOGISIJESSIE+1, pogisijessie-2);
     leftPlayer.addends2 = pogisijessie - leftPlayer.addends1;
     leftPlayer.useless1 = GetRandomValue(leftPlayer.addends1+1, leftPlayer.addends2+1);
     leftPlayer.useless2 = GetRandomValue(leftPlayer.useless1+1, leftPlayer.addends2+2);
 
-    // shuffle the numbers
+    /* store the numbers in an array 
+     * shuffle the array
+     */
     uint arrayOfNumbers[4] = {leftPlayer.addends1,
                             leftPlayer.addends2,
                             leftPlayer.useless1,
                             leftPlayer.useless2};
     for (int i = 3; i > 0; i--){
-
         int j = GetRandomValue(0, 120) % i;
         arrayOfNumbers[i] = arrayOfNumbers[i] + arrayOfNumbers[j];
         arrayOfNumbers[j] = arrayOfNumbers[i] - arrayOfNumbers[j];
@@ -109,13 +101,11 @@ void GenerateNew_numbers(){
     leftPlayer.addends2 = arrayOfNumbers[1];
     leftPlayer.useless1 = arrayOfNumbers[2];
     leftPlayer.useless2 = arrayOfNumbers[3];
-
-
 }
 
 void MatchInitialize(){
-    GenerateNew_pogisijessie();
-    GenerateNew_numbers();      // generate addends
+    //GenerateNew_pogisijessie();
+    //GenerateNew_numbers();      // generate addends
 
     WaitFor_xseconds(startTime, 1);
     // proceed drawing pogisijessie 
@@ -136,4 +126,15 @@ void WaitFor_xseconds(float startTime, float xtime){
         //continue;
     }
     
+}
+GameMatch::GameMatch(bool pause, bool readyMode, bool coolDownMode, bool showDownMode, bool rewardingMode){
+    pause = pause;
+    readyMode = readyMode;
+    coolDownMode = coolDownMode;
+    showDownMode = showDownMode;
+    rewardingMode = rewardingMode;
+}
+
+void GameMatch::Pause(){
+    gameMatch.pause = !gameMatch.pause;
 }

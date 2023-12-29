@@ -13,8 +13,7 @@ typedef unsigned int uint;
 inline bool pause;
 inline uint pogisijessie;
 inline double startTime;
-uint GenerateNew_pogisijessie();
-void GenerateNew_numbers();
+
 
 void InitializeAll();
 
@@ -23,11 +22,28 @@ public:
     uint addends1, addends2, useless1, useless2;
     uint key1, key2, key3, key4;
     uint point;
+    uint health;
     Player(uint one, uint two, uint three, uint four);
     void DrawOptions();
     void RandomizeBindings(uint one, uint two, uint three, uint four);
     void RandomizeNumbers(uint add1, uint add2, uint sls1, uint sls2);
 };
+
+class GameMatch{
+public:
+    bool readyMode;
+    bool coolDownMode;
+    bool showDownMode;
+    bool rewardingMode;
+    bool pause;
+
+    GameMatch(bool pause, bool readyMode, bool coolDownMode, bool showDownMode, bool rewardingMode);
+    void GenerateNew_pogisijessie();
+    void GenerateNew_numbers();
+    void Pause();
+};
+inline GameMatch gameMatch = GameMatch(false, false, false, false, false);
+
 
 void MatchInitialize();
 void WaitFor_xseconds(float startTime, float xtime);

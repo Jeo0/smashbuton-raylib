@@ -13,13 +13,10 @@ int main()
     // initialize
     InitWindow(screenWidth, screenHeight, pogi);
     InitializeAll();
-    bool matchFlag = false;
-    bool coolDownMode = true;
-    bool showDownMode = false;
     uint lkey1=0, lkey2=0, lkey3=0, lkey4=0;
-    uint larray[2] = {};
+    bool lkey1bool=false, lkey2bool=false, lkey3bool=false, lkey4bool=false;
+    int larray[2] = {-1, -1};
     uint index = 0;
-    //startTime = GetTime();
     // initialize starting time 
     auto t1 = high_resolution_clock::now();
     auto t2 = high_resolution_clock::now();
@@ -28,55 +25,70 @@ int main()
     //auto timeElapsed = 0;
 
     while(!WindowShouldClose()){
+        // draw game
+        BeginDrawing();
         t2 = high_resolution_clock::now();
         timeElapsed = duration_cast<milliseconds>(t2-t1);
         
         if(IsKeyPressed(KEY_SPACE)){
-            pause = !pause;
-            matchFlag = false;
+            gameMatch.Pause();
+            gameMatch.showDownMode = false;
         }
+
+
+
         /*  ----------------------------- while it is not paused, do these code block ------------------------- */
-        if(!pause){
+        if(!gameMatch.pause){
             // update game state
             // bind the keyboard input into a value
-            /* ------------------------- TODO: make these bindings random -------------------------*/
-           lkey1=0;lkey2=0;lkey3=0;lkey4=0;
-           if(IsKeyPressed(leftPlayer.key1)) lkey1 = leftPlayer.addends1;
-           if(IsKeyPressed(leftPlayer.key2)) lkey2 = leftPlayer.addends2;
-           if(IsKeyPressed(leftPlayer.key3)) lkey3 = leftPlayer.useless1;
-           if(IsKeyPressed(leftPlayer.key4)) lkey4 = leftPlayer.useless2;
+            lkey1=0;lkey2=0;lkey3=0;lkey4=0;
+            /*
+            if(IsKeyPressed(leftPlayer.key1) && leftPlayer.key1 != IsKeyPressed(leftPlayer.key1)) lkey1 = leftPlayer.addends1;
+            if(IsKeyPressed(leftPlayer.key2) && leftPlayer.key2 != IsKeyPressed(leftPlayer.key2)) lkey2 = leftPlayer.addends2;
+            if(IsKeyPressed(leftPlayer.key3) && leftPlayer.key3 != IsKeyPressed(leftPlayer.key3)) lkey3 = leftPlayer.useless1;
+            if(IsKeyPressed(leftPlayer.key4) && leftPlayer.key4 != IsKeyPressed(leftPlayer.key4)) lkey4 = leftPlayer.useless2;
+            */
+            if(IsKeyPressed(leftPlayer.key1) && lkey1 != larray[0]) {lkey1 = leftPlayer.addends1; }
+            if(IsKeyPressed(leftPlayer.key2) && lkey2 != larray[0]) {lkey2 = leftPlayer.addends2; }
+            if(IsKeyPressed(leftPlayer.key3) && lkey3 != larray[0]) {lkey3 = leftPlayer.useless1; }
+            if(IsKeyPressed(leftPlayer.key4) && lkey4 != larray[0]) {lkey4 = leftPlayer.useless2; }
 
-
-
-            /* flush*/
+            /* flush COOLDOWNMODE */
             if(index>=2){
                 index = 0;
-                larray[0] = 0;
-                larray[1] = 0;
-                
+                larray[0] = -1;
+                larray[1] = -1;
+                /* -------------reset the flag when lkeyx is pressed------------*/
+                lkey1bool = false;
+                lkey2bool = false;
+                lkey3bool = false;
+                lkey4bool = false;
             }
-
-
             // record if key is pressed 
             // AND if the values in the record will equate to the pogisijessie
             // and if the previous key is not the same key pressed
-            if(lkey1 && leftPlayer.key1 != IsKeyPressed(leftPlayer.key1)) {
+            if(lkey1 && lkey1bool == false) {
                 larray[index] = lkey1; 
+                lkey1bool = true;
                 index++;}
-            if(lkey2 && leftPlayer.key2 != IsKeyPressed(leftPlayer.key2)) {
+            if(lkey2 && lkey2bool == false) {
                 larray[index] = lkey2;
+                lkey2bool = true;
                 index++;}
-            if(lkey3 && leftPlayer.key3 != IsKeyPressed(leftPlayer.key3)) {
+            if(lkey3 && lkey3bool == false) {
                 larray[index] = lkey3;
+                lkey3bool = true;
                 index++;}
-            if(lkey4 && leftPlayer.key4 != IsKeyPressed(leftPlayer.key4)) {
+            if(lkey4 && lkey4bool == false) {
                 larray[index] = lkey4;
+                lkey4bool = true;
                 index++;}
+
 
 
             // evaluate
             if(larray[0] + larray[1] == pogisijessie){
-                matchFlag = true;
+                gameMatch.showDownMode = true;
                 leftPlayer.point++;
             }
             DrawText(TextFormat("index 0: %i", larray[0]), GetScreenWidth()/2, GetScreenHeight() * 0.9, 36, ORANGE);
@@ -86,9 +98,7 @@ int main()
 
 
 
-        // draw game
-        BeginDrawing();
-            ClearBackground(WHITE);         /* start from a white background */
+            ClearBackground(WHITE);                 /* start from a white background */
             /*  ----------- draw the pogisijessie   -------------------*/
             DrawText(TextFormat("%i", pogisijessie), GetScreenWidth()/2, GetScreenHeight() * 0.1, 100, BLUE);
             //DrawText(TextFormat("timeElapsed %i", timeElapsed), GetScreenWidth()*.1, GetScreenHeight() * 0.9, 50, RED);
@@ -106,14 +116,14 @@ int main()
                 DrawText("pause", GetScreenWidth()/2, GetScreenHeight()/2, (screenHeight/2) * 0.4, BLACK   );
 
             /* if match is done, pause */
-            if(matchFlag){
+            if(gameMatch.showDownMode){
                 // pause
                 DrawText(TextFormat("%i : %i", leftPlayer.point, rightPlayer.point), GetScreenWidth()/2, GetScreenHeight() * 0.25, 50, ORANGE);
 
                 //MatchInitialize();
-                pogisijessie = GenerateNew_pogisijessie();
+                gameMatch.GenerateNew_pogisijessie();
 
-                GenerateNew_numbers();      // generate addends
+                gameMatch.GenerateNew_numbers();      // generate addends
 
                 DrawFPS(10,10);
                 EndDrawing();
