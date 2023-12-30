@@ -1,4 +1,4 @@
-#ifndef INITIALIZEALL_HPP_
+/*#ifndef INITIALIZEALL_HPP_
 #define INITIALIZEALL_HPP_
 #define MAXPOGISIJESSIE 179
 #define MINPOGISIJESSIE 21
@@ -25,8 +25,6 @@ public:
     uint health;
     Player(uint one, uint two, uint three, uint four);
     void DrawOptions();
-    void RandomizeBindings(uint one, uint two, uint three, uint four);
-    void RandomizeNumbers(uint add1, uint add2, uint sls1, uint sls2);
 };
 
 class GameMatch{
@@ -49,10 +47,11 @@ void MatchInitialize();
 void WaitFor_xseconds(float startTime, float xtime);
 
 
-inline Player leftPlayer = Player(KEY_W, KEY_A, KEY_S, KEY_D);
+inline Player leftPlayer = Player(KEY_W, KEY_A, KEY_S, KeyboardKey::KEY_D);
 inline Player rightPlayer = Player(KEY_I, KEY_J, KEY_K, KEY_L);
 
 
 
 
 #endif
+*/
