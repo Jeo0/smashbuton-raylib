@@ -60,7 +60,7 @@ bool Modes::CheckIf_showdownModeDone_andAdd_points(){
     if (leftPlayer.health<= 0 || rightPlayer.health<=0){
         // update player points
         if(leftPlayer.health <=0) rightPlayer.point+=1;
-        else                        leftPlayer.point+=1;
+        else if(rightPlayer.health <=0) leftPlayer.point+=1;
 
         return true;
     }
