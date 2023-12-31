@@ -21,5 +21,5 @@ void Modes::InitializeFirstGameState(){
 
     
         
-    SetTargetFPS(60);               // Set desired framerate (frames per second)
+    SetTargetFPS(144);               // Set desired framerate (frames per second)
 }

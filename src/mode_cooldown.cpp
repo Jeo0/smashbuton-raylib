@@ -19,3 +19,20 @@ void Player::DrawRegisters(char whatPosition){
 void Modes::DrawPogisijessie(){
     DrawText(TextFormat("%i", pogisijessie), GetScreenWidth()/2, GetScreenHeight() * 0.1, 100, BLUE);
 }
+
+void Modes::GenerateNew_numbers(){
+    // generate numbers
+    leftPlayer.addends1 = pogisijessie - GetRandomValue(MINPOGISIJESSIE+1, pogisijessie-2);
+    leftPlayer.addends2 = pogisijessie - leftPlayer.addends1;
+    leftPlayer.useless1 = GetRandomValue(leftPlayer.addends1+1, leftPlayer.addends2+1);
+    leftPlayer.useless2 = GetRandomValue(leftPlayer.useless1+1, leftPlayer.addends2+2);
+
+    rightPlayer.addends1 = leftPlayer.addends1;
+    rightPlayer.addends2 = leftPlayer.addends2;
+    rightPlayer.useless1 = leftPlayer.useless1;
+    rightPlayer.useless2 = leftPlayer.useless2;
+
+
+    leftPlayer.ShuffleArray(leftPlayer.addends1, leftPlayer.addends2, leftPlayer.useless1, leftPlayer.useless2);
+    rightPlayer.ShuffleArray(rightPlayer.addends1, rightPlayer.addends2, rightPlayer.useless1, rightPlayer.useless2);
+}

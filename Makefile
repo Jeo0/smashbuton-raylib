@@ -11,7 +11,7 @@ endif
 
 #linux:
 #default:
-	#g++ "src/*.cpp" -o build/main.out\
+	#g++ "src/*.cpp"  -o build/main.out\
 		$(CFLAGS) \
 		-I include \
 		-L lib \

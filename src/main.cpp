@@ -10,7 +10,14 @@ int main()
         switch(mode.state) 
         {
             case READY: {
-                mode.state = COOLDOWN;
+                leftPlayer.Ready_check();
+                rightPlayer.Ready_check();
+                
+                if(leftPlayer.amready && rightPlayer.amready){
+                    leftPlayer.ResetAlpha_and_lkey();
+                    rightPlayer.ResetAlpha_and_lkey(); 
+                    mode.state = COOLDOWN;
+                }
 
             } break;
             case COOLDOWN: {
@@ -50,14 +57,9 @@ int main()
 
             } break;
             // case RESULTS: {
-            //     // Update END screen data here!
+                // Update END screen data here!
                 
-            //     framesCounter++;
-                
-            //     // LESSON 03: Inputs management (keyboard, mouse)
-            //     if (IsKeyPressed(KEY_ENTER)) screen = TITLE;
-
-            // } break;
+            //} break;
             default: break;
         }
         //----------------------------------------------------------------------------------
@@ -70,16 +72,17 @@ int main()
             
             switch(mode.state) {
                 case READY: {
-                    // TODO: Draw LOGO screen here!
-                    // DrawText("LOGO SCREEN", 20, 20, 40, LIGHTGRAY);
-                    // DrawText("WAIT for 3 SECONDS...", 290, 220, 20, GRAY);
+                    leftPlayer.Draw_IsReady('L');
+                    rightPlayer.Draw_IsReady('R');
                 } break;
+
                 case COOLDOWN: {
                     // TODO: Draw TITLE screen here!
                     mode.DrawPogisijessie();
                     DrawText(TextFormat("%i : %i", leftPlayer.point, rightPlayer.point), GetScreenWidth() / 2, GetScreenHeight() * 0.25, 50, ORANGE);
 
                 } break;
+                
                 case SHOWDOWN: {
                     // TODO: Draw GAMEPLAY screen here!
                     DrawText(TextFormat("%i : %i", leftPlayer.point, rightPlayer.point), GetScreenWidth() / 2, GetScreenHeight() * 0.25, 50, ORANGE);
@@ -97,6 +100,7 @@ int main()
                     else
                         DrawText("paused", screenWidth/2, screenHeight/2, 40, BLACK);
                 } break;
+
                 // case RESULTS: {
                 //     // TODO: Draw ENDING screen here!
                 //     DrawRectangle(0, 0, screenWidth, screenHeight, BLUE);
