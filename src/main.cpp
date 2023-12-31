@@ -14,8 +14,11 @@ int main()
                 rightPlayer.Ready_check();
                 
                 if(leftPlayer.amready && rightPlayer.amready){
-                    leftPlayer.ResetAlpha_and_lkey();
-                    rightPlayer.ResetAlpha_and_lkey(); 
+                    leftPlayer.ResetAlpha();
+                    rightPlayer.ResetAlpha(); 
+
+                    leftPlayer.Reset_lkey();
+                    rightPlayer.Reset_lkey();
                     mode.state = COOLDOWN;
                 }
 
@@ -34,13 +37,13 @@ int main()
                 }
 
             } break;
-            case SHOWDOWN: { 
-                // Update GAMEPLAY screen data here!
 
-                mode.CheckIfPause_and_PauseAccordingly();
-                if (!mode.pause)
-                {
-                    // TODO: Gameplay logic
+            case SHOWDOWN: { 
+                if(IsKeyPressed(KEY_SPACE)){
+                    mode.pause = !mode.pause;
+                    mode.state = PAUSE;
+                }
+                else {
                     leftPlayer.BindIfKeyPressed();
                     rightPlayer.BindIfKeyPressed();
 
@@ -53,9 +56,18 @@ int main()
                     rightPlayer.ResetHealth();
                     mode.state = COOLDOWN;
                 }
-                if(mode.CheckIf_onePlayer_reached_5_matchPoints()) mode.state = RESULTS;
+                if(mode.CheckIf_onePlayer_reached_5_matchPoints()) 
+                    mode.state = RESULTS;
 
             } break;
+
+            case PAUSE: {
+                if(IsKeyPressed(KEY_SPACE)){
+                    mode.pause = !mode.pause;
+                    mode.state = SHOWDOWN;
+                }
+            }
+
             // case RESULTS: {
                 // Update END screen data here!
                 
@@ -84,22 +96,26 @@ int main()
                 } break;
                 
                 case SHOWDOWN: {
-                    // TODO: Draw GAMEPLAY screen here!
                     DrawText(TextFormat("%i : %i", leftPlayer.point, rightPlayer.point), GetScreenWidth() / 2, GetScreenHeight() * 0.25, 50, ORANGE);
-                    if (!mode.pause){
-                        mode.DrawPogisijessie();
-                        leftPlayer.DrawOptions('L');
-                        leftPlayer.DrawRegisters('L');
-                        leftPlayer.DrawHealth('L');
+                    mode.DrawPogisijessie();
+                    leftPlayer.DrawOptions('L');
+                    leftPlayer.DrawRegisters('L');
+                    leftPlayer.DrawHealth('L');
+                    leftPlayer.DrawAnimateRegisters('L');
 
-                        rightPlayer.DrawOptions('R');
-                        rightPlayer.DrawRegisters('R');
-                        rightPlayer.DrawHealth('R');
+                    rightPlayer.DrawOptions('R');
+                    rightPlayer.DrawRegisters('R');
+                    rightPlayer.DrawHealth('R');
 
-                    }
-                    else
-                        DrawText("paused", screenWidth/2, screenHeight/2, 40, BLACK);
+                    
                 } break;
+                case PAUSE: {
+                    float fontSize = 50;
+                    DrawText("paused", 
+                        (GetScreenWidth()/2) - (6*fontSize*0.25), 
+                        GetScreenHeight()/2, 
+                        fontSize, BLACK);
+                }break;
 
                 // case RESULTS: {
                 //     // TODO: Draw ENDING screen here!

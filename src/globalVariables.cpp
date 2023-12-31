@@ -9,14 +9,12 @@ Player::Player(uint one, uint two, uint three, uint four){
 }
 
 
-void Modes::CheckIfPause_and_PauseAccordingly(){
-    // pause if needed
+bool Modes::CheckIfPause(){
     if(IsKeyPressed(KEY_SPACE)){
         pause = !pause;
+        return pause;
     }
-
-    // else dont change the state
-
+    return pause;
 }
 
 

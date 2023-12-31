@@ -28,7 +28,7 @@ public:
     void InitializeFirstGameState();
     void GenerateNew_pogisijessie();
     void GenerateNew_numbers();
-    void CheckIfPause_and_PauseAccordingly();
+    bool CheckIfPause();
     bool CheckIf_onePlayer_reached_5_matchPoints();
     bool CheckIf_showdownModeDone_andAdd_points();
     void EvaluateShowdownMode();
@@ -46,9 +46,9 @@ inline Modes mode;
 /* player class */
 class Player{
 public:
-    uint health;
+    int health;
     uint point;
-    float allpha[4] {1.0f, 1.0f, 1.0f, 1.0f};
+    float alpha[4] {1.0f, 1.0f, 1.0f, 1.0f};
     bool amready = false;
 
     
@@ -60,13 +60,15 @@ public:
 
 
     int registers[2] = {-1, -1};
+    bool greenFlag = false;                     // for drawing correct combination
 
     Player(uint, uint, uint, uint);
     void ShuffleArray(uint, uint, uint, uint);
     void BindIfKeyPressed();
     void Register();          // lkey1, lkey2, lkey3, lkey4
     void ResetHealth();
-    void ResetAlpha_and_lkey();
+    void ResetAlpha();
+    void Reset_lkey();
     void ReduceAlpha(uint);                     // pass index
     void Draw_ready(char, Color, uint, float, uint);   // 
 
@@ -79,6 +81,7 @@ public:
     void DrawRegisters(char);
     void DrawHealth(char);
     void Draw_IsReady(char);
+    void DrawAnimateRegisters(char);
 };
 inline Player leftPlayer = Player(KEY_W, KEY_A, KEY_S, KEY_D);
 inline Player rightPlayer = Player(KEY_I, KEY_J, KEY_K, KEY_L);

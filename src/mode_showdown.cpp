@@ -17,6 +17,12 @@ void Player::DrawOptions(char whatPosition){
     }
 }
 
+void Player::DrawAnimateRegisters(char whatPosition){
+    if(whatPosition == 'L'){
+
+    }
+}
+
 void Player::ShuffleArray(uint one, uint two, uint three, uint four){
     // shuffle
     uint arrayOfNumbers[4] = {one, two, three, four};
@@ -39,11 +45,13 @@ bool Modes::CheckIf_onePlayer_reached_5_matchPoints(){
 }
 
 bool Modes::CheckIf_showdownModeDone_andAdd_points(){
-    if (leftPlayer.health<= 0 || rightPlayer.health<=0){
-        // update player points
-        if(leftPlayer.health <=0) rightPlayer.point+=1;
-        else if(rightPlayer.health <=0) leftPlayer.point+=1;
-
+    // update player points
+    if (leftPlayer.health<= 0){
+        rightPlayer.point+=1;
+        return true;
+    }
+    else if(rightPlayer.health <=0) {
+        leftPlayer.point+=1;
         return true;
     }
 
@@ -54,14 +62,18 @@ void Modes::EvaluateShowdownMode(){
     // REDUCE right enemy's health if correct combi & + 1, else REDUCE left health 
     if(leftPlayer.registers[0] + leftPlayer.registers[1] == mode.pogisijessie && leftPlayer.index >= 2){
         rightPlayer.health -=2;
-        leftPlayer.health +=1;}
+        leftPlayer.health +=1;
+        leftPlayer.greenFlag = true;        // flag for drawing green
+        }
     else if(leftPlayer.registers[0] + leftPlayer.registers[1] != mode.pogisijessie && leftPlayer.index >= 2)
         leftPlayer.health -=2;
 
     // REDUCE left enemy's health if correct combi & +1, else REDUCE right health 
     if(rightPlayer.registers[0] + rightPlayer.registers[1] == mode.pogisijessie && rightPlayer.index >=2){
         leftPlayer.health -=2;
-        rightPlayer.health +=1;}
+        rightPlayer.health +=1;
+        rightPlayer.greenFlag = true;       // flag for drawing green
+        }
     else if(rightPlayer.registers[0] + rightPlayer.registers[1] != mode.pogisijessie && rightPlayer.index >=2)
         rightPlayer.health -=2;
     
