@@ -1,4 +1,3 @@
-/*
 #include "raylib.h"
 #include "raymath.h"
 #include <iostream>
@@ -14,7 +13,7 @@ void InitializeAll(){
     SetTargetFPS(50);
 
     /* game state variables*/
-    /*pause = false;
+    pause = false;
     leftPlayer.point = 0;
     rightPlayer.point = 0;
     leftPlayer.health = 20;
@@ -54,7 +53,7 @@ void GameMatch::GenerateNew_numbers(){
     /* store the numbers in an array 
      * shuffle the array
      */
-    /*uint arrayOfNumbers[4] = {leftPlayer.addends1,
+    uint arrayOfNumbers[4] = {leftPlayer.addends1,
                             leftPlayer.addends2,
                             leftPlayer.useless1,
                             leftPlayer.useless2};
@@ -82,7 +81,7 @@ void MatchInitialize(){
     leftPlayer.DrawOptions();
 
     /* game state variables*/
-    /*pause = false;
+    pause = false;
 }
 
 void WaitFor_xseconds(float startTime, float xtime){
@@ -106,4 +105,4 @@ GameMatch::GameMatch(bool pause, bool readyMode, bool coolDownMode, bool showDow
 
 void GameMatch::Pause(){
     gameMatch.pause = !gameMatch.pause;
-}*/
+}

@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "bit": "cpp",
-        "ctime": "cpp",
-        "limits": "cpp",
-        "xlocale": "cpp",
-        "xlocinfo": "cpp"
-    }
-}

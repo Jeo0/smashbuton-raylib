@@ -1,6 +1,24 @@
 #include "globalVariables.h"
 #include "mode_showdown.h"
 
+void Modes::DrawShowdown() {
+    DrawText(TextFormat("%i : %i", leftPlayer.point, rightPlayer.point), GetScreenWidth() / 2, GetScreenHeight() * 0.25, 50, ORANGE);
+    mode.DrawPogisijessie();
+    leftPlayer.DrawOptions('L');
+    leftPlayer.DrawRegisters('L');
+    leftPlayer.DrawHealth('L');
+    leftPlayer.DrawAnimateRegisters('L');
+
+    rightPlayer.DrawOptions('R');
+    rightPlayer.DrawRegisters('R');
+    rightPlayer.DrawHealth('R');
+}
+
+void Modes::ShowInstructions(){
+    //DrawTexture(texture, screenWidth / 2 - texture.width / 2, screenHeight / 2 - texture.height / 2, WHITE);
+
+    //DrawText("this IS a texture loaded from an image!", 300, 370, 10, GRAY);
+}
 
 void Player::DrawOptions(char whatPosition){
     if(whatPosition == 'R'){
@@ -41,7 +59,7 @@ void Player::ShuffleArray(uint one, uint two, uint three, uint four){
 }
 
 bool Modes::CheckIf_onePlayer_reached_5_matchPoints(){
-    return (leftPlayer.point>=5 || rightPlayer.point >=5);
+    return (leftPlayer.point>=MAXPOINTS || rightPlayer.point >=MAXPOINTS);
 }
 
 bool Modes::CheckIf_showdownModeDone_andAdd_points(){
@@ -50,7 +68,7 @@ bool Modes::CheckIf_showdownModeDone_andAdd_points(){
         rightPlayer.point+=1;
         return true;
     }
-    else if(rightPlayer.health <=0) {
+    if(rightPlayer.health <=0) {
         leftPlayer.point+=1;
         return true;
     }
@@ -139,3 +157,5 @@ void Player::DrawHealth(char whatPosition){
 void Player::ResetHealth(){
     Player::health = MAXHEALTH;
 }
+
+

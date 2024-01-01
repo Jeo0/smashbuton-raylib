@@ -1,4 +1,3 @@
-/*
 #include <iostream>
 #include <chrono>
 #include "raylib.h"
@@ -9,26 +8,32 @@
     using std::chrono::duration;
     using std::chrono::milliseconds;
 
+
+
+
+
+
+
 int depreciated_main()
 {
     // initialize
-    InitWindow(screenWidth, screenHeight, pogi);
-    InitializeAll();
-    uint lkey1=0, lkey2=0, lkey3=0, lkey4=0;
-    bool lkey1bool=false, lkey2bool=false, lkey3bool=false, lkey4bool=false;
-    int larray[2] = {-1, -1};
-    uint index = 0;
-    // initialize starting time 
-    auto t1 = high_resolution_clock::now();
-    auto t2 = high_resolution_clock::now();
-    auto timeElapsed = duration_cast<milliseconds>(t2-t1);
+    // InitWindow(screenWidth, screenHeight, pogi);
+    // InitializeAll();
+    // uint lkey1=0, lkey2=0, lkey3=0, lkey4=0;
+    // bool lkey1bool=false, lkey2bool=false, lkey3bool=false, lkey4bool=false;
+    // int larray[2] = {-1, -1};
+    // uint index = 0;
+    // // initialize starting time 
+    // auto t1 = high_resolution_clock::now();
+    // auto t2 = high_resolution_clock::now();
+    // auto timeElapsed = duration_cast<milliseconds>(t2-t1);
 
     //auto timeElapsed = 0;
 
     while(!WindowShouldClose()){
         // draw game
-        t2 = high_resolution_clock::now();
-        timeElapsed = duration_cast<milliseconds>(t2-t1);
+        // t2 = high_resolution_clock::now();
+        // timeElapsed = duration_cast<milliseconds>(t2-t1);
         
         if(IsKeyPressed(KEY_SPACE)){
             gameMatch.Pause();
@@ -37,8 +42,7 @@ int depreciated_main()
 
 
 
-        /*  ----------------------------- while it is not paused, do these code block ------------------------- */
-        /*if(!gameMatch.pause){
+        if(!gameMatch.pause){
             // update game state
             // bind the keyboard input into a value
             lkey1=0;lkey2=0;lkey3=0;lkey4=0;
@@ -49,7 +53,7 @@ int depreciated_main()
 
             /* -------------flush COOLDOWNMODE----------------------------- */
             /* -------------reset the flag when lkeyx is pressed------------*/
-            /*if(index>=2){
+            if(index>=2){
                 index = 0;
                 larray[0] = -1;
                 larray[1] = -1;
@@ -95,7 +99,7 @@ int depreciated_main()
         BeginDrawing();
             ClearBackground(WHITE);                 /* start from a white background */
             /*  ----------- draw the pogisijessie   -------------------*/
-            /*DrawText(TextFormat("%i", pogisijessie), GetScreenWidth()/2, GetScreenHeight() * 0.1, 100, BLUE);
+            DrawText(TextFormat("%i", pogisijessie), GetScreenWidth()/2, GetScreenHeight() * 0.1, 100, BLUE);
             //DrawText(TextFormat("timeElapsed %i", timeElapsed), GetScreenWidth()*.1, GetScreenHeight() * 0.9, 50, RED);
 
             // show key inputs when pressed
@@ -107,14 +111,15 @@ int depreciated_main()
             // match point
             /* if match is end; do pause */
             
-            //if(pause)
-                //DrawText("pause", GetScreenWidth()/2, GetScreenHeight()/2, (screenHeight/2) * 0.4, BLACK   );
+            if(pause)
+                DrawText("pause", GetScreenWidth()/2, GetScreenHeight()/2, (screenHeight/2) * 0.4, BLACK   );
 
             /* if match is done, pause */
-            //if(gameMatch.showDownMode){
+            if(gameMatch.showDownMode){
                 // pause
                 // show score
-                /*DrawText(TextFormat("%i : %i", leftPlayer.point, rightPlayer.point), GetScreenWidth()/2, GetScreenHeight() * 0.25, 50, ORANGE);
+
+                DrawText(TextFormat("%i : %i", leftPlayer.point, rightPlayer.point), GetScreenWidth()/2, GetScreenHeight() * 0.25, 50, ORANGE);
 
                 gameMatch.GenerateNew_pogisijessie();
 
@@ -133,7 +138,7 @@ int depreciated_main()
 
 
             /* everyloop, show these */
-            /*leftPlayer.DrawOptions();
+            leftPlayer.DrawOptions();
 
             // show points
             DrawText(TextFormat("%i : %i", leftPlayer.point, rightPlayer.point), GetScreenWidth() / 2, GetScreenHeight() * 0.25, 50, ORANGE);
@@ -144,4 +149,4 @@ int depreciated_main()
 
     }
 
-}*/
+}

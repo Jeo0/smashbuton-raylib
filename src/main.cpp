@@ -3,6 +3,10 @@
 int main()
 {
     mode.InitializeFirstGameState();
+    Image image = LoadImage("textures/instructions.png");     // Loaded in CPU memory (RAM)
+    Texture2D texture = LoadTextureFromImage(image);          // Image converted to texture, GPU memory (VRAM)
+
+    bool instructions_shown_at_ready = false;
     
     // Main game loop
     while (!WindowShouldClose())    
@@ -10,17 +14,26 @@ int main()
         switch(mode.state) 
         {
             case READY: {
-                leftPlayer.Ready_check();
-                rightPlayer.Ready_check();
-                
-                if(leftPlayer.amready && rightPlayer.amready){
-                    leftPlayer.ResetAlpha();
-                    rightPlayer.ResetAlpha(); 
-
-                    leftPlayer.Reset_lkey();
-                    rightPlayer.Reset_lkey();
-                    mode.state = COOLDOWN;
+                if (IsKeyPressed(KEY_SPACE)) {
+                    instructions_shown_at_ready = true;
                 }
+
+                if(instructions_shown_at_ready){
+
+                    leftPlayer.Ready_check();
+                    rightPlayer.Ready_check();
+
+                    if (leftPlayer.amready && rightPlayer.amready) {
+                        leftPlayer.ResetAlpha();
+                        rightPlayer.ResetAlpha();
+
+                        leftPlayer.Reset_lkey();
+                        rightPlayer.Reset_lkey();
+                        mode.state = COOLDOWN;
+                    }
+                }
+
+
 
             } break;
             case COOLDOWN: {
@@ -40,7 +53,7 @@ int main()
 
             case SHOWDOWN: { 
                 if(IsKeyPressed(KEY_SPACE)){
-                    mode.pause = !mode.pause;
+                    //mode.pause = !mode.pause;       // pause now -> TRUE
                     mode.state = PAUSE;
                 }
                 else {
@@ -51,11 +64,13 @@ int main()
                     rightPlayer.Register();
                 }
 
+                
                 if(mode.CheckIf_showdownModeDone_andAdd_points()) {
                     leftPlayer.ResetHealth();
                     rightPlayer.ResetHealth();
                     mode.state = COOLDOWN;
                 }
+
                 if(mode.CheckIf_onePlayer_reached_5_matchPoints()) 
                     mode.state = RESULTS;
 
@@ -63,15 +78,26 @@ int main()
 
             case PAUSE: {
                 if(IsKeyPressed(KEY_SPACE)){
-                    mode.pause = !mode.pause;
+                    //mode.pause = !mode.pause;           // pause was true, now becomes false
                     mode.state = SHOWDOWN;
                 }
-            }
+            }break;
 
-            // case RESULTS: {
-                // Update END screen data here!
+            case RESULTS: {
+                if(leftPlayer.point >= MAXPOINTS)
+                    mode.winnerFlag = 'L';
+                if (rightPlayer.point >= MAXPOINTS) 
+                    mode.winnerFlag = 'R';
                 
-            //} break;
+                if(IsKeyPressed(KEY_ESCAPE)){
+                    leftPlayer.ResetHealth();
+                    rightPlayer.ResetHealth();
+
+                    leftPlayer.ResetPoints();
+                    rightPlayer.ResetPoints();
+                    mode.state = COOLDOWN;
+                }
+            } break;
             default: break;
         }
         //----------------------------------------------------------------------------------
@@ -84,8 +110,14 @@ int main()
             
             switch(mode.state) {
                 case READY: {
-                    leftPlayer.Draw_IsReady('L');
-                    rightPlayer.Draw_IsReady('R');
+                    
+                    float scale = 0.78;
+                    if(instructions_shown_at_ready){
+                        leftPlayer.Draw_IsReady('L');
+                        rightPlayer.Draw_IsReady('R');
+                    }
+                    else
+                        DrawTextureEx(texture, {screenWidth/2 - (texture.width/2 * scale), screenHeight/2 - (texture.height/2 * scale)}, 0, scale, WHITE);
                 } break;
 
                 case COOLDOWN: {
@@ -96,34 +128,33 @@ int main()
                 } break;
                 
                 case SHOWDOWN: {
-                    DrawText(TextFormat("%i : %i", leftPlayer.point, rightPlayer.point), GetScreenWidth() / 2, GetScreenHeight() * 0.25, 50, ORANGE);
-                    mode.DrawPogisijessie();
-                    leftPlayer.DrawOptions('L');
-                    leftPlayer.DrawRegisters('L');
-                    leftPlayer.DrawHealth('L');
-                    leftPlayer.DrawAnimateRegisters('L');
-
-                    rightPlayer.DrawOptions('R');
-                    rightPlayer.DrawRegisters('R');
-                    rightPlayer.DrawHealth('R');
-
-                    
+                    mode.DrawShowdown();
                 } break;
+
                 case PAUSE: {
                     float fontSize = 50;
                     DrawText("paused", 
                         (GetScreenWidth()/2) - (6*fontSize*0.25), 
                         GetScreenHeight()/2, 
                         fontSize, BLACK);
+
+                    mode.DrawShowdown();
+                    //mode.ShowInstructions();
+
+                    //DrawTexture(texture, screenWidth/2 - texture.width/2, screenHeight/2 - texture.height/2, WHITE);
+                    float scale = 0.78;
+                    DrawTextureEx(texture, {screenWidth/2 - (texture.width/2 * scale), screenHeight/2 - (texture.height/2 * scale)}, 0, scale, WHITE);
+                    
                 }break;
 
-                // case RESULTS: {
-                //     // TODO: Draw ENDING screen here!
-                //     DrawRectangle(0, 0, screenWidth, screenHeight, BLUE);
-                //     DrawText("ENDING SCREEN", 20, 20, 40, DARKBLUE);
-                //     DrawText("PRESS ENTER or TAP to RETURN to TITLE SCREEN", 120, 220, 20, DARKBLUE);
+                case RESULTS: {
+                    // TODO: Draw ENDING screen here!
+                    if (mode.winnerFlag == 'L')
+                        leftPlayer.DrawResults(mode.winnerFlag);
+                    else
+                        rightPlayer.DrawResults(mode.winnerFlag);
 
-                // } break;
+                } break;
                 default: break;
             }
         
@@ -135,6 +166,8 @@ int main()
     //--------------------------------------------------------------------------------------
     
     // NOTE: Unload any loaded resources (texture, fonts, audio)
+    UnloadImage(image);
+    UnloadTexture(texture);
 
     CloseWindow();              // Close window and OpenGL context
     

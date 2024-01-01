@@ -1,0 +1,29 @@
+
+Gemplaye:
+	ready phase:
+		- At first, show dis instruction,
+		- press space if u red dis all
+		- press "WDAS ILJK" if both are ready to play
+	
+	cooldown phase:
+		- randomize black number at the top center
+
+	showdown phase:
+		- combine the only two numbers from the four keys (wasd or ijkl) will equate to the randomized black number
+		- spam those two numbers to defaet za enemi
+		- healths:
+			= if ur combination is wrong, -2 health for u
+			= if ur combination is okay, +1 health for u; and -2 health for the enemy
+	
+	result phase:
+		- the first one to achieve 5 points will be the winner
+
+
+
+Controls:
+	WASD for left player
+	IJKL for right player
+	press space to show instructions again
+	press escape to reset the game (after resulting phase)
+
+

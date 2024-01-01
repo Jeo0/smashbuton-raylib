@@ -1,4 +1,4 @@
-/*#ifndef INITIALIZEALL_HPP_
+#ifndef INITIALIZEALL_HPP_
 #define INITIALIZEALL_HPP_
 #define MAXPOGISIJESSIE 179
 #define MINPOGISIJESSIE 21
@@ -54,4 +54,3 @@ inline Player rightPlayer = Player(KEY_I, KEY_J, KEY_K, KEY_L);
 
 
 #endif
-*/

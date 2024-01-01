@@ -4,7 +4,9 @@
 #define MINPOGISIJESSIE 21
 #define MAXPOGISIJESSIE 189
 
+
 #define MAXHEALTH 40
+#define MAXPOINTS 5
 
 #include "raylib.h"
 #include "InitializeFirstGameState.h"
@@ -15,12 +17,19 @@ typedef unsigned int uint;
 /* game modes */
 typedef enum { READY, COOLDOWN, SHOWDOWN, RESULTS, PAUSE} GamePhase;
 
+//char pause_str[] = "PAUSE";
+//Vector2 PAUSE_DIM = MeasureTextEx(GetFontDefault(), pause_str, 100, 10);
+
 class Modes{
 public:
     /* things for manipulating game states */
     uint pogisijessie;
     bool pause = false;
+    char winnerFlag = 'L';          // default
     GamePhase state;     
+
+    //Image image;
+    //Texture2D texture;
 
     /* timer related functions */
     int t1, t2, timeElapsed;
@@ -34,9 +43,16 @@ public:
     void EvaluateShowdownMode();
 
     void DrawPogisijessie();
+    void DrawShowdown();
+    void ShowInstructions();
 
 };
 inline Modes mode;
+//inline Image image = LoadImage("textures/instructions.png");     // Loaded in CPU memory (RAM)
+//inline Texture2D texture = LoadTextureFromImage(mode.image);          // Image converted to texture, GPU memory (VRAM)
+
+
+
 
 
 
@@ -74,6 +90,7 @@ public:
 
     bool CheckIfReady();
     void Ready_check();
+    void ResetPoints();
 
     // if char == L, left;      char == R, right
     // default = left
@@ -82,9 +99,16 @@ public:
     void DrawHealth(char);
     void Draw_IsReady(char);
     void DrawAnimateRegisters(char);
+    void DrawResults(char);
 };
 inline Player leftPlayer = Player(KEY_W, KEY_A, KEY_S, KEY_D);
 inline Player rightPlayer = Player(KEY_I, KEY_J, KEY_K, KEY_L);
 
+
+
+class VOIDS : public Player{
+public:
+    VOIDS(uint, uint, uint, uint);
+};
 
 #endif
