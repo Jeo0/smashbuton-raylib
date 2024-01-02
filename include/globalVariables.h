@@ -2,7 +2,7 @@
 #define GLOBAL_VARIABLES_H
 
 #define MINPOGISIJESSIE 21
-#define MAXPOGISIJESSIE 189
+#define MAXPOGISIJESSIE 453
 
 
 #define MAXHEALTH 40
@@ -15,7 +15,7 @@
 typedef unsigned int uint;
 
 /* game modes */
-typedef enum { READY, COOLDOWN, SHOWDOWN, RESULTS, PAUSE} GamePhase;
+typedef enum Gamephase { READY, COOLDOWN, SHOWDOWN, RESULTS, PAUSE} GamePhase;
 
 //char pause_str[] = "PAUSE";
 //Vector2 PAUSE_DIM = MeasureTextEx(GetFontDefault(), pause_str, 100, 10);
@@ -44,7 +44,7 @@ public:
 
     void DrawPogisijessie();
     void DrawShowdown();
-    void ShowInstructions();
+    void DrawInstructions(Gamephase);
 
 };
 inline Modes mode;
@@ -99,7 +99,7 @@ public:
     void DrawHealth(char);
     void Draw_IsReady(char);
     void DrawAnimateRegisters(char);
-    void DrawResults(char);
+    void DrawResults();
 };
 inline Player leftPlayer = Player(KEY_W, KEY_A, KEY_S, KEY_D);
 inline Player rightPlayer = Player(KEY_I, KEY_J, KEY_K, KEY_L);

@@ -9,7 +9,7 @@ Gemplaye:
 		- randomize black number at the top center
 
 	showdown phase:
-		- combine the only two numbers from the four keys (wasd or ijkl) will equate to the randomized black number
+		- combine the only two numbers from the four keys (wasd or ijkl) that will equate to the randomized black number
 		- spam those two numbers to defaet za enemi
 		- healths:
 			= if ur combination is wrong, -2 health for u

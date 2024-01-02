@@ -2,7 +2,7 @@
 #define INITIALIZE_FIRST_GAME_STATE_H
 
 
-inline const int screenWidth = 1280;
+inline const int screenWidth = 1750;
 inline const int screenHeight = 960;
 inline const char* pogi = "SMASHING KEYS";
 

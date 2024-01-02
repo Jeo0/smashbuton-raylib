@@ -5,20 +5,16 @@ void Modes::DrawShowdown() {
     DrawText(TextFormat("%i : %i", leftPlayer.point, rightPlayer.point), GetScreenWidth() / 2, GetScreenHeight() * 0.25, 50, ORANGE);
     mode.DrawPogisijessie();
     leftPlayer.DrawOptions('L');
-    leftPlayer.DrawRegisters('L');
-    leftPlayer.DrawHealth('L');
+    //leftPlayer.DrawRegisters('L');
     leftPlayer.DrawAnimateRegisters('L');
+    leftPlayer.DrawHealth('L');
 
     rightPlayer.DrawOptions('R');
-    rightPlayer.DrawRegisters('R');
+    //rightPlayer.DrawRegisters('R');
+    rightPlayer.DrawAnimateRegisters('R');
     rightPlayer.DrawHealth('R');
 }
 
-void Modes::ShowInstructions(){
-    //DrawTexture(texture, screenWidth / 2 - texture.width / 2, screenHeight / 2 - texture.height / 2, WHITE);
-
-    //DrawText("this IS a texture loaded from an image!", 300, 370, 10, GRAY);
-}
 
 void Player::DrawOptions(char whatPosition){
     if(whatPosition == 'R'){
@@ -37,7 +33,7 @@ void Player::DrawOptions(char whatPosition){
 
 void Player::DrawAnimateRegisters(char whatPosition){
     if(whatPosition == 'L'){
-
+        
     }
 }
 

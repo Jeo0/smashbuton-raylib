@@ -115,9 +115,14 @@ int main()
                     if(instructions_shown_at_ready){
                         leftPlayer.Draw_IsReady('L');
                         rightPlayer.Draw_IsReady('R');
+                        mode.DrawInstructions(READY);
                     }
-                    else
+                    else{
                         DrawTextureEx(texture, {screenWidth/2 - (texture.width/2 * scale), screenHeight/2 - (texture.height/2 * scale)}, 0, scale, WHITE);
+                        // same show
+                        mode.DrawInstructions(PAUSE);
+                    }
+                    
                 } break;
 
                 case COOLDOWN: {
@@ -129,6 +134,7 @@ int main()
                 
                 case SHOWDOWN: {
                     mode.DrawShowdown();
+                    mode.DrawInstructions(SHOWDOWN);
                 } break;
 
                 case PAUSE: {
@@ -139,20 +145,22 @@ int main()
                         fontSize, BLACK);
 
                     mode.DrawShowdown();
-                    //mode.ShowInstructions();
 
-                    //DrawTexture(texture, screenWidth/2 - texture.width/2, screenHeight/2 - texture.height/2, WHITE);
+                    // draw instructions
                     float scale = 0.78;
                     DrawTextureEx(texture, {screenWidth/2 - (texture.width/2 * scale), screenHeight/2 - (texture.height/2 * scale)}, 0, scale, WHITE);
+                    mode.DrawInstructions(PAUSE);
                     
                 }break;
 
                 case RESULTS: {
                     // TODO: Draw ENDING screen here!
                     if (mode.winnerFlag == 'L')
-                        leftPlayer.DrawResults(mode.winnerFlag);
+                        leftPlayer.DrawResults();
                     else
-                        rightPlayer.DrawResults(mode.winnerFlag);
+                        rightPlayer.DrawResults();
+                    
+                    mode.DrawInstructions(RESULTS);
 
                 } break;
                 default: break;
