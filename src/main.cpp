@@ -60,6 +60,8 @@ int main()
                     leftPlayer.BindIfKeyPressed();
                     rightPlayer.BindIfKeyPressed();
 
+                    leftPlayer.DrawAnimateRegisters('L');
+                    rightPlayer.DrawAnimateRegisters('R');
                     leftPlayer.Register();
                     rightPlayer.Register();
                 }
@@ -128,7 +130,7 @@ int main()
                 case COOLDOWN: {
                     // TODO: Draw TITLE screen here!
                     mode.DrawPogisijessie();
-                    DrawText(TextFormat("%i : %i", leftPlayer.point, rightPlayer.point), GetScreenWidth() / 2, GetScreenHeight() * 0.25, 50, ORANGE);
+                    mode.DrawPoints();
 
                 } break;
                 

@@ -76,8 +76,8 @@ void Player::Draw_IsReady(char player){
 }
 
 void Player::ResetAlpha(){
-    for(int index = 0; index<4; index++)
-        alpha[index] = 1.0f;
+    for(int x = 0; x<4; x++)
+        alpha[x] = 1.0f;
 }
 
 void Player::Reset_lkey(){
@@ -96,8 +96,10 @@ void Player::Ready_check(){
 void Player::ReduceAlpha(uint iii){
     if(alpha[iii] - 0.05f > 0)
         alpha[iii] -= 0.05f;
-    else
+    else{
         alpha[iii] = 0.0f;
+        alphaflag = false;
+    }
 }
 
 void Player::Draw_ready(char whatPosition, Color color, uint iindex, float posiY, uint keybind){

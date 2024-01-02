@@ -45,6 +45,7 @@ public:
     void DrawPogisijessie();
     void DrawShowdown();
     void DrawInstructions(Gamephase);
+    void DrawPoints();
 
 };
 inline Modes mode;
@@ -65,6 +66,8 @@ public:
     int health;
     uint point;
     float alpha[4] {1.0f, 1.0f, 1.0f, 1.0f};
+
+    float blackAlpha[4] {0.0f, 0.0f, 0.0f, 0.0f};
     bool amready = false;
 
     
@@ -73,6 +76,11 @@ public:
     bool key1bool=false, key2bool=false, key3bool=false, key4bool=false;    // responsible if wasdijkl is pressed
     uint lkey1=0, lkey2=0, lkey3=0, lkey4=0;        // for bindings flags
     uint index = 0;
+
+    bool alphaflag = false;
+    
+    uint keymode = 6;               // out of bounds, so we wont access the array
+    uint previousKeymode = 6;
 
 
     int registers[2] = {-1, -1};

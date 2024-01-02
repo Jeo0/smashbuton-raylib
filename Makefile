@@ -9,6 +9,8 @@ endif
 
 
 
+#	$env:Path = "~/Documents/w64devkit/bin/$env:Path;"
+
 #linux:
 #default:
 	#g++ "src/*.cpp"  -o build/main.out\

@@ -17,7 +17,17 @@ void Player::DrawRegisters(char whatPosition){
 }
 
 void Modes::DrawPogisijessie(){
-    DrawText(TextFormat("%i", pogisijessie), GetScreenWidth()/2, GetScreenHeight() * 0.1, 100, BLUE);
+    char text[] = "%i ";
+    int size = 100;
+    int spacing = 10;
+    Vector2 text_dim = MeasureTextEx(GetFontDefault(), text, size, spacing);
+
+    DrawTextEx(GetFontDefault(), 
+        TextFormat(text, pogisijessie), 
+        {GetScreenWidth()/2 - (text_dim.x/2),
+        ((float)(GetScreenHeight()*0.1)  - (text_dim.y/2))},
+        size, spacing, BLUE);
+    //DrawText(TextFormat("%i", pogisijessie), GetScreenWidth()/2, GetScreenHeight() * 0.1, 100, BLUE);
 }
 
 void Modes::GenerateNew_numbers(){
