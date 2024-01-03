@@ -6,6 +6,7 @@ Player::Player(uint one, uint two, uint three, uint four){
     key2 = two;
     key3 = three;
     key4 = four;
+    
 }
 
 
@@ -21,13 +22,19 @@ bool Modes::CheckIfPause(){
 void Modes::DrawInstructions(Gamephase nani){
     if(nani == SHOWDOWN){
         char text[] = "combine and spam two numbers to kil ur oponet";
+        char plspause[] = "press SPACE to pause";
         int size = 20;
         int spacing = 3;
         Vector2 text_dim = MeasureTextEx(GetFontDefault(), text, size, spacing);
+        Vector2 plspause_dim= MeasureTextEx(GetFontDefault(), plspause, size, spacing);
 
         DrawTextEx(GetFontDefault(), text, 
             {GetScreenWidth()/2 - (text_dim.x/2),
             (GetScreenHeight()/2 - (text_dim.y/2) + (GetScreenHeight()/3))},
+            size, spacing, {150,150,150,255});
+        DrawTextEx(GetFontDefault(), plspause, 
+            {GetScreenWidth()/2 - (plspause_dim.x/2),
+            (GetScreenHeight()/2 - (plspause_dim.y/2) + (GetScreenHeight()/(2.5)))},
             size, spacing, {150,150,150,255});
     }
     if(nani == RESULTS){
@@ -64,3 +71,8 @@ void Modes::DrawInstructions(Gamephase nani){
             size, spacing, {150,150,150,255});
     }
 }
+
+
+
+/*****************************************/
+// audios

@@ -68,6 +68,9 @@ public:
     float alpha[4] {1.0f, 1.0f, 1.0f, 1.0f};
 
     float blackAlpha[4] {0.0f, 0.0f, 0.0f, 0.0f};
+    int local_keymode = 6;
+    int local_previouskey = 6;
+
     bool amready = false;
 
     

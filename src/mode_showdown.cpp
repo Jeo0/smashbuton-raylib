@@ -49,10 +49,10 @@ void Player::DrawOptions(char whatPosition){
 }
 
 void Player::DrawAnimateRegisters(char whatPosition){
-    float pos[4] {0.2, 0.4, 0.6, 0.8};
 
     float boxWidth = GetScreenWidth() * 0.3;
     float boxHeight = GetScreenHeight() * 0.8 * 0.25;
+    float pos[4] {0.2, 0.4, 0.6, 0.8};
 
     
     if(index >0){
@@ -71,10 +71,10 @@ void Player::DrawAnimateRegisters(char whatPosition){
     if(whatPosition == 'L'){
         Color color {255,111,111};        // red
         //blackAlpha[keymode] = 1.0f;
-        DrawRectangle(0, GetScreenHeight()*pos[keymode], boxWidth, boxHeight, 
+        DrawRectangle(0, GetScreenHeight()*pos[keymode]-(boxHeight/2), boxWidth, boxHeight, 
             ColorAlpha(color, alpha[keymode]));
 
-        DrawRectangle(0, GetScreenHeight()*pos[previousKeymode], boxWidth, boxHeight, 
+        DrawRectangle(0, GetScreenHeight()*pos[previousKeymode]-(boxHeight/2), boxWidth, boxHeight, 
             ColorAlpha(color, alpha[previousKeymode]));
         
     }
@@ -183,10 +183,15 @@ void Modes::EvaluateShowdownMode(){
 
 }
 
+
 void Player::Register(){
     
-        int keyIndex1 = std::distance(registers, std::find(registers, registers + 2, registers[0]));
-        int keyIndex2 = std::distance(registers, std::find(registers, registers + 2, registers[1]));
+        //int keyIndex1 = std::distance(keybindings, std::find(keybindings, keybindings+4, registers[0]));
+        //int keyIndex2 = std::distance(keybindings, std::find(keybindings, keybindings+4, registers[1]));
+
+        //int keyIndex1 = find();
+        //int keyIndex2 = std::distance(registers, std::find(registers, registers + 2, registers[1]));
+        //std::cout << keyIndex1 << "\n" << keyIndex2 << "\n\n";
         /* -------------flush COOLDOWNMODE----------------------------- */
         /* -------------reset the flag when lkeyx is pressed------------*/
         if(index>=2){
@@ -197,8 +202,8 @@ void Player::Register(){
             
             alphaflag = true;
             ResetAlpha();
-            previousKeymode= 6;
-            keymode =6;
+            local_keymode = keymode;                // copy to be alphaed
+            local_previouskey = previousKeymode;    // copy to bea laphaed
 
 
             index = 0;
@@ -210,10 +215,11 @@ void Player::Register(){
             key4bool = false;
         }
 
-        // if(alphaflag==true){
-        //     ReduceAlpha(3);
-        //     ReduceAlpha(2);
-        // }
+        if(alphaflag == true){
+            ReduceAlpha(local_keymode);
+            ReduceAlpha(local_previouskey);
+        }
+
         // record if key is pressed 
         // AND if the values in the record will equate to the pogisijessie
         // and if the previous key is not the same key pressed
@@ -237,6 +243,12 @@ void Player::Register(){
             key4bool = true;
             index++;
             keymode = 3;}
+
+
+        if(alphaflag==true){
+            ReduceAlpha(local_keymode);
+            ReduceAlpha(local_previouskey);
+        }
 }
 
 void Player::BindIfKeyPressed(){
