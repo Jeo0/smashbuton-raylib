@@ -1,4 +1,5 @@
 ## HOW TO RUN
+**you need to have `make` installed (_see HOWTOBUILD_)**
 **do not run the exe inside the "build/run/" folder**<br>  
 just use `make runrelease` or `make rundebug` when inside the *build* folder<br>  
 _make sure to not move them outside that folder structure_
@@ -10,12 +11,46 @@ _make sure to not move them outside that folder structure_
 
 
 ## HOW TO BUILD
-assuming make (mingw; see **step X** or **step Y**) is installed in windows system OR included in the environment;
-+ go inside the build folder, and just run `make` from the base directory after cloning/extracting the repository <br> <br> <br>
+assuming make (mingw; see **step X** or **step Y**) is installed in windows system OR included in the environment; <br>
+**OR if not** you could instead do the following: <br> <br>
+
+### if u are accessing from the WWW
+- & if u do not have g++ and make installed; 
+- download the zip file or clone this repository instead;
+- extract this in the downloads folder
+- download "https://github.com/skeeto/w64devkit/releases/download/v1.21.0/w64devkit-1.21.0.zip"
+- extract it in the downloads folder
+- open powershell and run this script:
+
+```md
+# for make and g++ to be addedd onto the current path instance of powershell
+$env:Path = "C:\Users\_______PC_NUMBER______\Downloads\w64devkit\bin;$env:Path";
+cd "C:\Users\________PC_NUMBER________\Downloads\smashbuton-raylib-main\build\"
+make
+```
+
+<br> <br>
 
 
 
-### step X (installing msys for g++)
+### if u have access to the usb to be passed onto the prof;
+- & if u do not have g++ and make installed 
+- open powershell and run this script:
+
+```ps
+# for make and g++ to be addedd onto the current path instance of powershell
+$env:Path = "____DRIVE_LETTER____:\group1\w64devkit\bin;$env:Path";
+cd "____DRIVE_LETTER____:\group1\smashbuton-raylib-main\build\"
+make
+```
+
+
+
+<br> <br> <br>
+------------------------------------------------------
+<br> <br> <br>
+
+#### step X (installing msys for g++)
 1. Install msys; please follow very closely: [Installing the MinGW-w64 toolchain](https://code.visualstudio.com/docs/cpp/config-mingw#_installing-the-mingww64-toolchain)
 2. download the repository (either zip or cloning; just make sure to extract the zip)
 3. run the msys terminal
@@ -27,7 +62,7 @@ assuming make (mingw; see **step X** or **step Y**) is installed in windows syst
 6. If all from the above is oke, run `mingw32-make.exe`
 <br> <br> <br>
 
-### step Y (installing mingw directly for g++)
+#### step Y (installing mingw directly for g++)
 1. download and choose this choice **[w64devkit-1.21.0.zip](https://github.com/skeeto/w64devkit/releases)**
 2. extract the zip file from somewhere (LET US *SAY* youve put it in `C:\Users\usernamemobading\Desktop`); take note of the location of the **bin folder** that is inside the extracted zip (e.g., `C:\Users\usernamemobading\Desktop\w64devkit\bin`)
 3. edit your path environment variable:

@@ -1,0 +1,32 @@
+
+
+if u are accessing from the www
+- & if u do not have g++ and make installed; 
+- download the zip file or clone this repository instead;
+- extract this in the downloads folder
+- download "https://github.com/skeeto/w64devkit/releases/download/v1.21.0/w64devkit-1.21.0.zip"
+- extract it in the downloads folder
+- open powershell and run this script:
+
+# for make and g++ to be addedd onto the current path instance of powershell
+$env:Path = "C:\Users\_______PC_NUMBER______\Downloads\w64devkit\bin;$env:Path";
+cd "C:\Users\________PC_NUMBER________\Downloads\smashbuton-raylib-main\build\"
+make
+
+
+
+
+
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+
+if u have access to the usb drive to be passed onto the prof;
+- & if u do not have g++ and make installed;
+- open powershell and run this script:
+
+# for make and g++ to be addedd onto the current path instance of powershell
+$env:Path = "____DRIVE_LETTER____:\group1\w64devkit\bin;$env:Path";
+cd "____DRIVE_LETTER____:\group1\smashbuton-raylib-main\build\"
+make
