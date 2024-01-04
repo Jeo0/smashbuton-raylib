@@ -20,6 +20,7 @@ bool Modes::CheckIfPause(){
 
 
 void Modes::DrawInstructions(Gamephase nani){
+
     if(nani == SHOWDOWN){
         char text[] = "combine and spam two numbers to kil ur oponet";
         char plspause[] = "press SPACE to pause";
@@ -73,6 +74,3 @@ void Modes::DrawInstructions(Gamephase nani){
 }
 
 
-
-/*****************************************/
-// audios

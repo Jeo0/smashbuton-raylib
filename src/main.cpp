@@ -3,19 +3,7 @@
 int main()
 {
     mode.InitializeFirstGameState();
-    Image image = LoadImage("resources/textures/instructions.png");     // Loaded in CPU memory (RAM)
-    Texture2D texture = LoadTextureFromImage(image);          // Image converted to texture, GPU memory (VRAM)
 
-    /*****************************************/
-    // move this into the MODES class instead
-    // InitAudioDevice();
-    // Sound sfxbg  = LoadSound("resources/sfx/bg.mp3");
-    // Music music = LoadMusicStream("resources/sfx/bg.mp3");
-    // PlayMusicStream(music);
-    // Sound sfxbruh= LoadSound("resources/sfx/bruh.mp3");
-    // Sound sfxlegit = LoadSound("resources/sfx/legit.mp3");
-    // Sound sfxmeow = LoadSound("resources/sfx/meow.mp3");
-    // Sound sfxoof = LoadSound("resources/sfx/oof.mp3");
 
 
     bool instructions_shown_at_ready = false;
@@ -23,18 +11,16 @@ int main()
     // Main game loop
     while (!WindowShouldClose())    
     {
-        // UpdateMusicStream(music);
+        UpdateMusicStream(music);
         switch(mode.state) 
         {
             case READY: {
                 if (IsKeyPressed(KEY_SPACE)) {
                     instructions_shown_at_ready = true;
-                    //PlaySound(sfxbg);
                 }
 
                 if(instructions_shown_at_ready){
 
-                    //PlaySound(sfxbg);
                     leftPlayer.Ready_check();
                     rightPlayer.Ready_check();
 
@@ -53,6 +39,7 @@ int main()
             } break;
             case COOLDOWN: {
                 // Update TITLE screen data here!
+                PlaySound(sfx_bruh);
 
                 mode.GenerateNew_pogisijessie(); 
                 mode.GenerateNew_numbers();
@@ -69,6 +56,7 @@ int main()
             case SHOWDOWN: { 
                 if(IsKeyPressed(KEY_SPACE)){
                     //mode.pause = !mode.pause;       // pause now -> TRUE
+                    PlaySound(sfx_meow_angry);
                     mode.state = PAUSE;
                 }
                 else {
@@ -88,23 +76,29 @@ int main()
                     mode.state = COOLDOWN;
                 }
 
-                if(mode.CheckIf_onePlayer_reached_5_matchPoints()) 
+                if(mode.CheckIf_onePlayer_reached_5_matchPoints()) {
+
                     mode.state = RESULTS;
+                    PlaySound(sfx_legit);
+                }
 
             } break;
 
             case PAUSE: {
                 if(IsKeyPressed(KEY_SPACE)){
                     //mode.pause = !mode.pause;           // pause was true, now becomes false
+                    PlaySound(sfx_meow_angry);
                     mode.state = SHOWDOWN;
                 }
             }break;
 
             case RESULTS: {
-                if(leftPlayer.point >= MAXPOINTS)
+                if(leftPlayer.point >= MAXPOINTS){
                     mode.winnerFlag = 'L';
-                if (rightPlayer.point >= MAXPOINTS) 
+                }
+                if (rightPlayer.point >= MAXPOINTS) {
                     mode.winnerFlag = 'R';
+                }
                 
                 if(IsKeyPressed(KEY_ESCAPE)){
                     leftPlayer.ResetHealth();
@@ -152,6 +146,7 @@ int main()
                 case SHOWDOWN: {
                     mode.DrawShowdown();
                     mode.DrawInstructions(SHOWDOWN);
+
                 } break;
 
                 case PAUSE: {
@@ -187,21 +182,9 @@ int main()
         //----------------------------------------------------------------------------------
     }
 
-    // De-Initialization
     
-    UnloadImage(image);
-    UnloadTexture(texture);
 
-    // UnloadSound(sfxbg);
-    // UnloadSound(sfxmeow);
-    // UnloadSound(sfxbruh);
-    // UnloadSound(sfxlegit);
-    // UnloadSound(sfxoof);
-
-
-    // StopMusicStream(music);
-    // CloseAudioDevice();
-    CloseWindow();              // Close window and OpenGL context
+    mode.DeInitialize();
     
     return 0;
 }

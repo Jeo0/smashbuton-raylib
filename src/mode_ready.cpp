@@ -2,10 +2,10 @@
 
 bool Player::CheckIfReady(){
     
-    if(IsKeyPressed(key1)) lkey1 = 1; 
-    if(IsKeyPressed(key2)) lkey2 = 1;
-    if(IsKeyPressed(key3)) lkey3 = 1;
-    if(IsKeyPressed(key4)) lkey4 = 1;
+    if(IsKeyPressed(key1)){ lkey1 = 1;PlaySound(sfx_oof);}
+    if(IsKeyPressed(key2)) {lkey2 = 1;PlaySound(sfx_oof);}
+    if(IsKeyPressed(key3)) {lkey3 = 1;PlaySound(sfx_oof);}
+    if(IsKeyPressed(key4)) {lkey4 = 1;PlaySound(sfx_oof);}
 
 
     if (lkey1 && lkey2 && lkey3 && lkey4){

@@ -55,7 +55,7 @@ void Player::DrawAnimateRegisters(char whatPosition){
     float pos[4] {0.2, 0.4, 0.6, 0.8};
 
     
-    if(index >0){
+    if(index >1){
         previousKeymode = keymode;
     }
 
@@ -132,6 +132,11 @@ void Modes::EvaluateShowdownMode(){
     if(leftPlayer.registers[0] + leftPlayer.registers[1] == mode.pogisijessie && leftPlayer.index >= 2){
         rightPlayer.health -=2;
         leftPlayer.health +=1;
+
+        /*-------------------- play audio ----------------------*/
+        PlaySound(sfx_meow);
+
+
         leftPlayer.greenFlag = true;        // flag for drawing green
 
         // int keyIndex1 = std::distance(leftPlayer.registers, std::find(leftPlayer.registers, leftPlayer.registers + 2, leftPlayer.registers[0]));
@@ -144,6 +149,7 @@ void Modes::EvaluateShowdownMode(){
         }
     else if(leftPlayer.registers[0] + leftPlayer.registers[1] != mode.pogisijessie && leftPlayer.index >= 2){
         leftPlayer.health -=2;
+        PlaySound(sfx_meow_sad);
         
         // int keyIndex1 = std::distance(leftPlayer.registers, std::find(leftPlayer.registers, leftPlayer.registers + 2, leftPlayer.registers[0]));
         // int keyIndex2 = std::distance(leftPlayer.registers, std::find(leftPlayer.registers, leftPlayer.registers + 2, leftPlayer.registers[1]));
@@ -158,6 +164,8 @@ void Modes::EvaluateShowdownMode(){
     if(rightPlayer.registers[0] + rightPlayer.registers[1] == mode.pogisijessie && rightPlayer.index >=2){
         leftPlayer.health -=2;
         rightPlayer.health +=1;
+
+        PlaySound(sfx_meow);
         rightPlayer.greenFlag = true;       // flag for drawing green
 
 
@@ -171,6 +179,7 @@ void Modes::EvaluateShowdownMode(){
         }
     else if(rightPlayer.registers[0] + rightPlayer.registers[1] != mode.pogisijessie && rightPlayer.index >=2){
         rightPlayer.health -=2;
+        PlaySound(sfx_meow_sad);
 
         // int keyIndex1 = std::distance(rightPlayer.registers, std::find(rightPlayer.registers, rightPlayer.registers + 2, rightPlayer.registers[0]));
         // int keyIndex2 = std::distance(rightPlayer.registers, std::find(rightPlayer.registers, rightPlayer.registers + 2, rightPlayer.registers[1]));

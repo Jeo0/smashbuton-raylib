@@ -41,6 +41,7 @@ public:
     bool CheckIf_onePlayer_reached_5_matchPoints();
     bool CheckIf_showdownModeDone_andAdd_points();
     void EvaluateShowdownMode();
+    void DeInitialize();
 
     void DrawPogisijessie();
     void DrawShowdown();
@@ -49,8 +50,20 @@ public:
 
 };
 inline Modes mode;
-//inline Image image = LoadImage("textures/instructions.png");     // Loaded in CPU memory (RAM)
-//inline Texture2D texture = LoadTextureFromImage(mode.image);          // Image converted to texture, GPU memory (VRAM)
+
+// images for pause menu
+inline Image image;
+inline Texture2D texture;
+
+// sounds
+inline Music music;
+inline Sound sfx_oof;
+inline Sound sfx_bruh;
+inline Sound sfx_legit;
+inline Sound sfx_meow;
+inline Sound sfx_meow_sad;
+inline Sound sfx_meow_angry;
+
 
 
 
