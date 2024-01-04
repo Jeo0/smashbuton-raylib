@@ -24,7 +24,7 @@ void Modes::DrawPogisijessie(){
 
     DrawTextEx(GetFontDefault(), 
         TextFormat(text, pogisijessie), 
-        {GetScreenWidth()/2 - (text_dim.x/2),
+        {GetScreenWidth()/2 - (text_dim.x/2.5),
         ((float)(GetScreenHeight()*0.1)  - (text_dim.y/2))},
         size, spacing, BLUE);
     //DrawText(TextFormat("%i", pogisijessie), GetScreenWidth()/2, GetScreenHeight() * 0.1, 100, BLUE);
