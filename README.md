@@ -1,5 +1,5 @@
 ## HOW TO RUN
-**do not run the exe folder**<br>  
+**do not run the exe inside the "build/run/" folder**<br>  
 just use `make runrelease` or `make rundebug` when inside the *build* folder<br>  
 _make sure to not move them outside that folder structure_
 
