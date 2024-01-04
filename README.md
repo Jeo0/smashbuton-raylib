@@ -1,6 +1,11 @@
-assuming make (mingw; see step X or step Y) is installed in windows system OR included in the environment;
+# HOW TO RUN
+just run the exe file inside build
 
-just run `make` from the base directory after cloning/extracting the repository
+
+
+# HOW TO BUILD
+assuming make (mingw; see **step X** or ** step Y**) is installed in windows system OR included in the environment;
++ go inside the build folder, and just run `make` from the base directory after cloning/extracting the repository
 
 
 
