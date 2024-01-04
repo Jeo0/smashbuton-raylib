@@ -1,5 +1,9 @@
 ## HOW TO RUN
-just run the exe file inside build/run folder <br> <br> <br> 
+just run the exe file inside build/run folder 
+_make sure to not move them outside that folder structure_
+*u can instead just use a shortcut, and move them elsewhere accordingly*
+<br> <br> <br> 
+
 
 
 
