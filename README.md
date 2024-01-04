@@ -1,5 +1,5 @@
 ## HOW TO RUN
-just run the exe file inside build <br> <br> <br> <br> <br>
+just run the exe file inside build/run folder <br> <br> <br> 
 
 
 
@@ -19,6 +19,7 @@ assuming make (mingw; see **step X** or **step Y**) is installed in windows syst
 5. Do `ls` to check if you are at the intended location;
 - YOU SHOULD SEE the folders: build, depreciated, include, lib, src, Makefile, README.md, plan.txt
 6. If all from the above is oke, run `mingw32-make.exe`
+<br> <br> <br>
 
 ### step Y (installing mingw directly for g++)
 1. download and choose this choice **[w64devkit-1.21.0.zip](https://github.com/skeeto/w64devkit/releases)**

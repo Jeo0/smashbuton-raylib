@@ -22,26 +22,26 @@ endif
 
 # windows
 default:	# debug mode
-	g++ "src/*.cpp" -o main_debug.exe\
+	g++ "src/*.cpp" -o run/main_debug.exe\
 		$(CFLAGS) \
 		-I include \
 		-L lib \
 		$(LINKFLAGS)
-	./main_debug.exe
+	./run/main_debug.exe
 
 release:	# release mode
-	g++ "src/*.cpp" -o main_release.exe\
+	g++ "src/*.cpp" -o run/main_release.exe\
 		-Wall -Wno-missing-braces -std=c++17 -s -O1 \
 		-I include \
 		-L lib \
 		$(LINKFLAGS)
-	./main_release.exe
+	./run/main_release.exe
 
 rundebug:
-	./main_debug.exe
+	./run/main_debug.exe
 
 runrelease:
-	./main_release.exe
+	./run/main_release.exe
 
 # -I D:\dev\gui\raylib\raylib\raylib\src 
 #  default g++ folder
