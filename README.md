@@ -1,8 +1,8 @@
 ## HOW TO RUN
-**you need to have `make` installed (_see HOWTOBUILD_)**
+**you need to have `make` installed (_see HOWTOBUILD_)**<br>
 **do not run the exe inside the "build/run/" folder**<br>  
 just use `make runrelease` or `make rundebug` when inside the *build* folder<br>  
-_make sure to not move them outside that folder structure_
+_make sure to not move them outside of that folder structure_
 
 
 <br> <br> <br> 
@@ -37,7 +37,7 @@ make
 - & if u do not have g++ and make installed 
 - open powershell and run this script:
 
-```ps
+```md
 # for make and g++ to be addedd onto the current path instance of powershell
 $env:Path = "____DRIVE_LETTER____:\group1\w64devkit\bin;$env:Path";
 cd "____DRIVE_LETTER____:\group1\smashbuton-raylib-main\build\"
