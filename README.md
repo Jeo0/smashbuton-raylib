@@ -1,7 +1,9 @@
 ## HOW TO RUN
-just run the exe file inside build/run folder 
+**do not run the exe folder**<br>  
+just use `make runrelease` or `make rundebug` when inside the *build* folder<br>  
 _make sure to not move them outside that folder structure_
-*u can instead just use a shortcut, and move them elsewhere accordingly*
+
+
 <br> <br> <br> 
 
 
