@@ -1,8 +1,8 @@
 ## HOW TO RUN
 **you need to have `make` installed (_see HOWTOBUILD_)**<br>
-**do not run the exe inside the "build/run/" folder**<br>  
-just use `make runrelease` or `make rundebug` when inside the *build* folder<br>  
-_make sure to not move them outside of that folder structure_
+once doing so, just use `make runrelease` or `make rundebug` when inside the *build* folder<br>  
+_make sure to not move them outside of that folder structure_ <br>
+_**DO NOT RUN** the exe inside the "build/run/" folder_ <br>
 
 
 <br> <br> <br> 
@@ -26,7 +26,7 @@ assuming make (mingw; see **step X** or **step Y**) is installed in windows syst
 # for make and g++ to be addedd onto the current path instance of powershell
 $env:Path = "C:\Users\_______PC_NUMBER______\Downloads\w64devkit\bin;$env:Path";
 cd "C:\Users\________PC_NUMBER________\Downloads\smashbuton-raylib-main\build\"
-make
+make runrelease
 ```
 
 <br> <br>
@@ -41,7 +41,7 @@ make
 # for make and g++ to be addedd onto the current path instance of powershell
 $env:Path = "____DRIVE_LETTER____:\group1\w64devkit\bin;$env:Path";
 cd "____DRIVE_LETTER____:\group1\smashbuton-raylib-main\build\"
-make
+make runrelease
 ```
 
 
