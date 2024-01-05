@@ -27,6 +27,7 @@ public:
     bool pause = false;
     char winnerFlag = 'L';          // default
     GamePhase state;     
+    bool instructions_shown_at_ready = false;
 
     //Image image;
     //Texture2D texture;
@@ -47,6 +48,12 @@ public:
     void DrawShowdown();
     void DrawInstructions(Gamephase);
     void DrawPoints();
+
+
+    // for animating player health 
+    int seconds = 4;
+    float alphagradient = 0.024f;
+    void AnimateHealthSystem();
 
 };
 inline Modes mode;
@@ -94,7 +101,11 @@ public:
     uint index = 0;
 
     bool alphaflag = false;
+    uint alphaFrameCounter = 0;
+    bool flag_minus2 = false;
+    bool flag_plus1 = false;
     
+    float alphaValue = 1.0f;
     uint keymode = 6;               // out of bounds, so we wont access the array
     uint previousKeymode = 6;
 
@@ -122,7 +133,8 @@ public:
     void DrawRegisters(char);
     void DrawHealth(char);
     void Draw_IsReady(char);
-    void DrawAnimateRegisters(char);
+    void DrawAnimateRegisters(char);            // not working
+    void DrawAnimateHealth(char, bool, float);
     void DrawResults();
 };
 inline Player leftPlayer = Player(KEY_W, KEY_A, KEY_S, KEY_D);

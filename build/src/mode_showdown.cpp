@@ -18,9 +18,11 @@ void Modes::DrawPoints(){
 }
 
 void Modes::DrawShowdown() {
-    mode.DrawPoints();
+    DrawPoints();
 
-    mode.DrawPogisijessie();
+    DrawPogisijessie();
+    AnimateHealthSystem();
+
     leftPlayer.DrawOptions('L');
     //leftPlayer.DrawRegisters('L');
     //leftPlayer.DrawAnimateRegisters('L');
@@ -30,6 +32,10 @@ void Modes::DrawShowdown() {
     //rightPlayer.DrawRegisters('R');
     //rightPlayer.DrawAnimateRegisters('R');
     rightPlayer.DrawHealth('R');
+
+    leftPlayer.alphaFrameCounter++;
+    rightPlayer.alphaFrameCounter++;
+
 }
 
 
@@ -136,28 +142,18 @@ void Modes::EvaluateShowdownMode(){
         /*-------------------- play audio ----------------------*/
         PlaySound(sfx_meow);
 
+        ////////////////////////////////////////////////////////////////
+        leftPlayer.flag_plus1 = true;        // flag for drawing green
+        rightPlayer.flag_minus2 = true;
 
-        leftPlayer.greenFlag = true;        // flag for drawing green
-
-        // int keyIndex1 = std::distance(leftPlayer.registers, std::find(leftPlayer.registers, leftPlayer.registers + 2, leftPlayer.registers[0]));
-        // int keyIndex2 = std::distance(leftPlayer.registers, std::find(leftPlayer.registers, leftPlayer.registers + 2, leftPlayer.registers[1]));
-
-        // std::cout << keyIndex1 << std::endl << keyIndex2 << "\n\n"; 
-
-        // leftPlayer.ReduceAlpha(keyIndex1);
-        // leftPlayer.ReduceAlpha(keyIndex2);
         }
     else if(leftPlayer.registers[0] + leftPlayer.registers[1] != mode.pogisijessie && leftPlayer.index >= 2){
         leftPlayer.health -=2;
         PlaySound(sfx_meow_sad);
+
+        ////////////////////////////////////////////////////////////////
+        leftPlayer.flag_minus2 = true;
         
-        // int keyIndex1 = std::distance(leftPlayer.registers, std::find(leftPlayer.registers, leftPlayer.registers + 2, leftPlayer.registers[0]));
-        // int keyIndex2 = std::distance(leftPlayer.registers, std::find(leftPlayer.registers, leftPlayer.registers + 2, leftPlayer.registers[1]));
-
-        // std::cout << keyIndex1 << std::endl << keyIndex2 << "\n\n"; 
-
-        // leftPlayer.ReduceAlpha(keyIndex1);
-        // leftPlayer.ReduceAlpha(keyIndex2);
     }
 
     // REDUCE left enemy's health if correct combi & +1, else REDUCE right health 
@@ -165,29 +161,22 @@ void Modes::EvaluateShowdownMode(){
         leftPlayer.health -=2;
         rightPlayer.health +=1;
 
+
+        ////////////////////////////////////////////////////////////////
         PlaySound(sfx_meow);
-        rightPlayer.greenFlag = true;       // flag for drawing green
+        rightPlayer.flag_plus1 = true;       // flag for drawing green
+        leftPlayer.flag_minus2 = true;
 
 
-        // int keyIndex1 = std::distance(rightPlayer.registers, std::find(rightPlayer.registers, rightPlayer.registers + 2, rightPlayer.registers[0]));
-        // int keyIndex2 = std::distance(rightPlayer.registers, std::find(rightPlayer.registers, rightPlayer.registers + 2, rightPlayer.registers[1]));
-
-        // std::cout << keyIndex1 << std::endl << keyIndex2 << "\n\n"; 
-
-        // rightPlayer.ReduceAlpha(keyIndex1);
-        // rightPlayer.ReduceAlpha(keyIndex2);
         }
     else if(rightPlayer.registers[0] + rightPlayer.registers[1] != mode.pogisijessie && rightPlayer.index >=2){
         rightPlayer.health -=2;
         PlaySound(sfx_meow_sad);
 
-        // int keyIndex1 = std::distance(rightPlayer.registers, std::find(rightPlayer.registers, rightPlayer.registers + 2, rightPlayer.registers[0]));
-        // int keyIndex2 = std::distance(rightPlayer.registers, std::find(rightPlayer.registers, rightPlayer.registers + 2, rightPlayer.registers[1]));
+        ////////////////////////////////////////////////////////////////
+        rightPlayer.flag_minus2 = true;
 
-        // std::cout << keyIndex1 << std::endl << keyIndex2 << "\n\n"; 
-
-        // rightPlayer.ReduceAlpha(keyIndex1);
-        // rightPlayer.ReduceAlpha(keyIndex2);
+   
     }
 
 }
@@ -279,6 +268,33 @@ void Player::DrawHealth(char whatPosition){
         DrawText(TextFormat("health: %i", Player::health), GetScreenWidth() * 0.1, GetScreenHeight() * 0.1, 30, RED);
 }
 
+void Player::DrawAnimateHealth(char whatPosition, bool whatPoint, float whatAlpha){
+    if(whatPosition == 'L'){
+        switch(whatPoint){
+            case true:
+                DrawText("+1", GetScreenWidth() * 0.2, GetScreenHeight() * 0.087, 60, ColorAlpha({18, 214, 0}, whatAlpha));
+                break;
+            case false:
+                DrawText("-2", GetScreenWidth() * 0.2, GetScreenHeight() * 0.087, 60, ColorAlpha({255, 56, 56}, whatAlpha));
+                break;
+            default: break;
+        }
+    }
+    else{
+        switch(whatPoint){
+            case true:
+                DrawText("+1", GetScreenWidth() * 0.75, GetScreenHeight() * 0.08, 60, ColorAlpha({18, 214, 0}, whatAlpha));
+                break;
+            case false:
+                DrawText("-2", GetScreenWidth() * 0.75, GetScreenHeight() * 0.08, 60, ColorAlpha({255, 56, 56}, whatAlpha));
+                break;
+            default: break;
+        }
+
+    }
+
+}
+
 void Player::ResetHealth(){
     keymode = 6;
     previousKeymode = 6;
@@ -288,3 +304,89 @@ void Player::ResetHealth(){
 }
 
 
+
+void Modes::AnimateHealthSystem(){
+    // l+1      r-2
+    if(leftPlayer.flag_plus1 == true && rightPlayer.flag_minus2 == true){
+        // after 1 sec, reset the flags to false;
+        // or if the alpha is lesser
+        // if(leftPlayer.alphaFrameCounter >= GetFPS() * seconds || leftPlayer.alphaValue <=0 || rightPlayer.alphaValue <= 0){          
+        if(leftPlayer.alphaValue <=0 || rightPlayer.alphaValue <= 0){          
+            leftPlayer.flag_plus1 = false;
+            rightPlayer.flag_minus2 = false;
+            leftPlayer.alphaValue = 1.0f;                          // reset the alpha too
+            rightPlayer.alphaValue = 1.0f;
+            leftPlayer.alphaFrameCounter = 0;                       // reset the alpha frame
+        }
+
+        else{
+            leftPlayer.DrawAnimateHealth('L', true, leftPlayer.alphaValue);
+            rightPlayer.DrawAnimateHealth('R', false, rightPlayer.alphaValue);
+
+            leftPlayer.alphaValue -= alphagradient; // reduce the alpha
+            rightPlayer.alphaValue -= alphagradient;
+        }
+    }
+
+    // r+1          l-2
+    if(rightPlayer.flag_plus1 == true && leftPlayer.flag_minus2 == true){
+        // after 1 sec, reset the flags to false;
+        // or if the alpha is lesser
+        //if(rightPlayer.alphaFrameCounter >= GetFPS() * seconds || leftPlayer.alphaValue <=0 || rightPlayer.alphaValue <= 0){          
+        if(leftPlayer.alphaValue <=0 || rightPlayer.alphaValue <= 0){          
+            rightPlayer.flag_plus1 = false;
+            leftPlayer.flag_minus2 = false;
+
+            leftPlayer.alphaValue = 1.0f;                          // reset the alpha too
+            rightPlayer.alphaValue = 1.0f;
+            rightPlayer.alphaFrameCounter = 0;                       // reset the alpha frame
+        }
+
+        else {
+            rightPlayer.DrawAnimateHealth('R', true, rightPlayer.alphaValue);
+            leftPlayer.DrawAnimateHealth('L', false, rightPlayer.alphaValue);
+
+            leftPlayer.alphaValue -= alphagradient; // reduce the alpha
+            rightPlayer.alphaValue -= alphagradient;
+        }
+    }
+
+
+    // l-2
+    if(leftPlayer.flag_minus2== true){
+        // after 1 sec, reset the flags to false;
+        // or if the alpha is lesser
+        //if(leftPlayer.alphaFrameCounter >= GetFPS() * seconds || leftPlayer.alphaValue <=0 ){          
+        if(leftPlayer.alphaValue <=0 ){          
+            leftPlayer.flag_minus2 = false;
+            leftPlayer.alphaValue = 1.0f;                          // reset the alpha too
+            leftPlayer.alphaFrameCounter = 0;                       // reset the alpha frame
+        }
+
+        else {
+            leftPlayer.DrawAnimateHealth('L', false, leftPlayer.alphaValue);
+            leftPlayer.alphaValue -= alphagradient; // reduce the alpha
+        }
+    }
+
+    // r-2
+    if(rightPlayer.flag_minus2== true){
+        // after 1 sec, reset the flags to false;
+        // or if the alpha is lesser
+        // if(rightPlayer.alphaFrameCounter >= GetFPS() * seconds || rightPlayer.alphaValue <=0 ){          
+        if(rightPlayer.alphaValue <=0 ){          
+            rightPlayer.flag_minus2 = false;
+            rightPlayer.alphaValue = 1.0f;                          // reset the alpha too
+            rightPlayer.alphaFrameCounter = 0;                       // reset the alpha frame
+        }
+
+        else {
+            rightPlayer.DrawAnimateHealth('R', false, rightPlayer.alphaValue);
+            rightPlayer.alphaValue -= alphagradient; // reduce the alpha
+        }
+    }
+
+
+
+
+}

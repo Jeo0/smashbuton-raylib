@@ -13,10 +13,10 @@ void Modes::InitializeFirstGameState(){
     rightPlayer.health = MAXHEALTH;
 
     SetExitKey(0);
-    SetTargetFPS(100);               // Set desired framerate (frames per second)
+    SetTargetFPS(200);              
     
 
-
+    // set the environment
     const char* prev_dir = GetWorkingDirectory();
     const char* application_dir = GetApplicationDirectory();
 

@@ -10,7 +10,7 @@ _make sure not to move them outside of that folder structure; <br> or you can ju
 
 
 ## HOW TO BUILD
-to replicate compiling and building the folder, i am to assume that gnu-make (mingw version; see **step X** or **step Y** if it is not installed) is installed in ur windows system OR included in the environment; <br>
+to replicate compiling and building the folder, it is assumed that gnu-make (mingw version; see **step X** or **step Y** if it is not installed) is installed in ur windows system OR included in the environment; <br>
 **OR if not** you could instead do the following: <br> <br>
 
 ### if u are accessing from the WWW

@@ -4,9 +4,6 @@ int main()
 {
     mode.InitializeFirstGameState();
 
-
-
-    bool instructions_shown_at_ready = false;
     
     // Main game loop
     while (!WindowShouldClose())    
@@ -16,10 +13,10 @@ int main()
         {
             case READY: {
                 if (IsKeyPressed(KEY_SPACE)) {
-                    instructions_shown_at_ready = true;
+                    mode.instructions_shown_at_ready = true;
                 }
 
-                if(instructions_shown_at_ready){
+                if(mode.instructions_shown_at_ready){
 
                     leftPlayer.Ready_check();
                     rightPlayer.Ready_check();
@@ -126,7 +123,7 @@ int main()
                 case READY: {
                     
                     float scale = 0.78;
-                    if(instructions_shown_at_ready){
+                    if(mode.instructions_shown_at_ready){
                         leftPlayer.Draw_IsReady('L');
                         rightPlayer.Draw_IsReady('R');
                         mode.DrawInstructions(READY);
