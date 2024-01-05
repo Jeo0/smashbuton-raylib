@@ -1,5 +1,6 @@
 ## HOW TO RUN
-download the zip file of this repository and as stated in howtorun.txt, just run the "_main_debug.exe_" or "_main_release.exe_" inside the "_smashbuton-raylib-main/build/run_" folder <br> <br>
+download the zip file of this repository and extract it <br> <br> 
+and as stated in howtorun.txt, just run the "_main_debug.exe_" or "_main_release.exe_" inside the "_smashbuton-raylib-main/build/run_" folder <br> <br>
 _make sure not to move them outside of that folder structure; <br> or you can just create a shortcute for the executable files, and move that elsewhere instead_<br>
 
 
