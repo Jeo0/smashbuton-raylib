@@ -1,5 +1,5 @@
 ## HOW TO RUN
-as stated in howtorun.txt, just run the "main_debug.exe" or "main_release.exe" inside the "smashbuton-raylib-main/build/run" folder <br>
+download the zip file of this repository and as stated in howtorun.txt, just run the "_main_debug.exe_" or "_main_release.exe_" inside the "_smashbuton-raylib-main/build/run_" folder <br> <br>
 _make sure not to move them outside of that folder structure; <br> or you can just create a shortcute for the executable files, and move that elsewhere instead_<br>
 
 
@@ -9,7 +9,7 @@ _make sure not to move them outside of that folder structure; <br> or you can ju
 
 
 ## HOW TO BUILD
-assuming make (mingw; see **step X** or **step Y**) is installed in windows system OR included in the environment; <br>
+to replicate compiling and building the folder, i am to assume that gnu-make (mingw version; see **step X** or **step Y** if it is not installed) is installed in ur windows system OR included in the environment; <br>
 **OR if not** you could instead do the following: <br> <br>
 
 ### if u are accessing from the WWW
