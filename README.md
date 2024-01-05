@@ -1,6 +1,6 @@
 ## HOW TO RUN
-just run the "main_debug.exe" or "main_release.exe" inside the "run" folder
-_make sure to not move them outside of that folder structure_ <br>
+as stated in howtorun.txt, just run the "main_debug.exe" or "main_release.exe" inside the "smashbuton-raylib-main/build/run" folder <br>
+_make sure not to move them outside of that folder structure; <br> or you can just create a shortcute for the executable files, and move that elsewhere instead_<br>
 
 
 <br> <br> <br> 

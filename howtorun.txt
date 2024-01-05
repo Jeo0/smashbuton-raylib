@@ -1,5 +1,5 @@
 how to run;
-proceed on running either of the exectuable inside "smashbuton-raylib-main/run/" folder
+proceed on running either of the exectuable inside "smashbuton-raylib-main/build/run/" folder
 
 
 
