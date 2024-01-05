@@ -95,8 +95,8 @@ void Player::Ready_check(){
 
 void Player::ReduceAlpha(uint iii){
 
-    if(alpha[iii] - 0.035f > 0)
-        alpha[iii] -= 0.035f;
+    if(alpha[iii] - 0.045f > 0)
+        alpha[iii] -= 0.045f;
     else{
         alpha[iii] = 0.0f;
         alphaflag = false;

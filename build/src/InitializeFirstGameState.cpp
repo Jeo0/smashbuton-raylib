@@ -13,7 +13,7 @@ void Modes::InitializeFirstGameState(){
     rightPlayer.health = MAXHEALTH;
 
     SetExitKey(0);
-    SetTargetFPS(200);              
+    SetTargetFPS(90);              
     
 
     // set the environment

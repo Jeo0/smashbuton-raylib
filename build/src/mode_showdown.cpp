@@ -144,6 +144,9 @@ void Modes::EvaluateShowdownMode(){
         leftPlayer.flag_plus1 = true;        // flag for drawing green
         rightPlayer.flag_minus2 = true;
 
+        leftPlayer.flag_minus2 = false;    // turn off others
+        rightPlayer.flag_plus1 = false;
+
         leftPlayer.alphaValue = 1.0f;       // reset the alpha
         rightPlayer.alphaValue = 1.0f;      // reset the alpha
 
@@ -154,6 +157,10 @@ void Modes::EvaluateShowdownMode(){
 
         ////////////////////////////////////////////////////////////////
         leftPlayer.flag_minus2 = true;
+
+        leftPlayer.flag_plus1 = false;      // turn off others
+        rightPlayer.flag_minus2 = false;
+        rightPlayer.flag_plus1 = false;
         leftPlayer.alphaValue = 1.0f;       // reset the alpha
         
     }
@@ -169,6 +176,9 @@ void Modes::EvaluateShowdownMode(){
         rightPlayer.flag_plus1 = true;       // flag for drawing green
         leftPlayer.flag_minus2 = true;
 
+        rightPlayer.flag_minus2 = false;    // turn off others
+        leftPlayer.flag_plus1 = false;
+
         leftPlayer.alphaValue = 1.0f;       // reset the alpha
         rightPlayer.alphaValue = 1.0f;      // reset the alpha
 
@@ -180,6 +190,10 @@ void Modes::EvaluateShowdownMode(){
 
         ////////////////////////////////////////////////////////////////
         rightPlayer.flag_minus2 = true;
+
+        rightPlayer.flag_plus1 = false;     // turn off others
+        leftPlayer.flag_minus2 = false;
+        leftPlayer.flag_plus1 = false;
         rightPlayer.alphaValue = 1.0f;      // reset the alpha
 
    
@@ -350,7 +364,7 @@ void Modes::AnimateHealthSystem(){
 
         else {
             rightPlayer.DrawAnimateHealth('R', true, rightPlayer.alphaValue);
-            leftPlayer.DrawAnimateHealth('L', false, rightPlayer.alphaValue);
+            leftPlayer.DrawAnimateHealth('L', false, leftPlayer.alphaValue);
 
             leftPlayer.alphaValue -= alphagradient; // reduce the alpha
             rightPlayer.alphaValue -= alphagradient;
