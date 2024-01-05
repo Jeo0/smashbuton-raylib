@@ -14,19 +14,32 @@ void Modes::InitializeFirstGameState(){
 
     SetExitKey(0);
     SetTargetFPS(100);               // Set desired framerate (frames per second)
+    
 
-    image = LoadImage("resources/textures/instructions.png");     // Loaded in CPU memory (RAM)
+
+    const char* prev_dir = GetWorkingDirectory();
+    const char* application_dir = GetApplicationDirectory();
+
+    ChangeDirectory(application_dir);
+
+    /*----------------loading assets ----------------------------------*/
+
+    image = LoadImage("../resources/textures/instructions.png");     // Loaded in CPU memory (RAM)
     texture = LoadTextureFromImage(image);          // Image converted to texture, GPU memory (VRAM)
 
     /*****************************************/
     InitAudioDevice();
-    music = LoadMusicStream("resources/sfx/bg.mp3");
-    sfx_bruh= LoadSound("resources/sfx/wav/bruh.wav");
-    sfx_legit = LoadSound("resources/sfx/wav/legit.wav");
-    sfx_meow = LoadSound("resources/sfx/wav/meow.wav");
-    sfx_oof = LoadSound("resources/sfx/wav/oof.wav");
-    sfx_meow_sad = LoadSound("resources/sfx/wav/meow_sad.wav");
-    sfx_meow_angry = LoadSound("resources/sfx/wav/meow_angry.wav");
+    music = LoadMusicStream("../resources/sfx/bg.mp3");
+    sfx_bruh= LoadSound("../resources/sfx/wav/bruh.wav");
+    sfx_legit = LoadSound("../resources/sfx/wav/legit.wav");
+    sfx_meow = LoadSound("../resources/sfx/wav/meow.wav");
+    sfx_oof = LoadSound("../resources/sfx/wav/oof.wav");
+    sfx_meow_sad = LoadSound("../resources/sfx/wav/meow_sad.wav");
+    sfx_meow_angry = LoadSound("../resources/sfx/wav/meow_angry.wav");
+
+
+    /*****************************************************************/
+    ChangeDirectory(prev_dir);                  // revert back to the directory
 
     PlayMusicStream(music);
 }

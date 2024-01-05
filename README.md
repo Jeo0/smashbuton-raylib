@@ -1,8 +1,6 @@
 ## HOW TO RUN
-**you need to have `make` installed (_see HOWTOBUILD_)**<br>
-once doing so, just use `make runrelease` or `make rundebug` when inside the *build* folder<br>  
+just run the "main_debug.exe" or "main_release.exe" inside the "run" folder
 _make sure to not move them outside of that folder structure_ <br>
-_**DO NOT RUN** the exe inside the "build/run/" folder_ <br>
 
 
 <br> <br> <br> 
