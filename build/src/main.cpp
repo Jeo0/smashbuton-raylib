@@ -64,6 +64,8 @@ int main()
                     rightPlayer.DrawAnimateRegisters('R');
                     leftPlayer.Register();
                     rightPlayer.Register();
+                    leftPlayer.alphaFrameCounter++;
+                    rightPlayer.alphaFrameCounter++;
                 }
 
                 

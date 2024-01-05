@@ -52,7 +52,7 @@ public:
 
     // for animating player health 
     int seconds = 4;
-    float alphagradient = 0.024f;
+    float alphagradient = 0.015f;
     void AnimateHealthSystem();
 
 };

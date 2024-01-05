@@ -33,8 +33,6 @@ void Modes::DrawShowdown() {
     //rightPlayer.DrawAnimateRegisters('R');
     rightPlayer.DrawHealth('R');
 
-    leftPlayer.alphaFrameCounter++;
-    rightPlayer.alphaFrameCounter++;
 
 }
 
@@ -146,6 +144,9 @@ void Modes::EvaluateShowdownMode(){
         leftPlayer.flag_plus1 = true;        // flag for drawing green
         rightPlayer.flag_minus2 = true;
 
+        leftPlayer.alphaValue = 1.0f;       // reset the alpha
+        rightPlayer.alphaValue = 1.0f;      // reset the alpha
+
         }
     else if(leftPlayer.registers[0] + leftPlayer.registers[1] != mode.pogisijessie && leftPlayer.index >= 2){
         leftPlayer.health -=2;
@@ -153,6 +154,7 @@ void Modes::EvaluateShowdownMode(){
 
         ////////////////////////////////////////////////////////////////
         leftPlayer.flag_minus2 = true;
+        leftPlayer.alphaValue = 1.0f;       // reset the alpha
         
     }
 
@@ -167,6 +169,9 @@ void Modes::EvaluateShowdownMode(){
         rightPlayer.flag_plus1 = true;       // flag for drawing green
         leftPlayer.flag_minus2 = true;
 
+        leftPlayer.alphaValue = 1.0f;       // reset the alpha
+        rightPlayer.alphaValue = 1.0f;      // reset the alpha
+
 
         }
     else if(rightPlayer.registers[0] + rightPlayer.registers[1] != mode.pogisijessie && rightPlayer.index >=2){
@@ -175,6 +180,7 @@ void Modes::EvaluateShowdownMode(){
 
         ////////////////////////////////////////////////////////////////
         rightPlayer.flag_minus2 = true;
+        rightPlayer.alphaValue = 1.0f;      // reset the alpha
 
    
     }
