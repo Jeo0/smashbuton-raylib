@@ -13,6 +13,20 @@ proceed on running either of the exectuable inside "smashbuton-raylib-main/build
 steps how to compile and build the project:
 
 
+FOR MAM RHIA:
+if u have access to the usb drive to be passed onto the prof;
+- & if u do not have g++ and make installed;
+- open powershell and paste this script:
+
+# for make and g++ to be addedd onto the current path instance of powershell
+$env:Path = "____DRIVE_LETTER____:\group1\w64devkit\bin;$env:Path";
+cd "____DRIVE_LETTER____:\group1\smashbuton-raylib-main\build\"
+make
+
+
+
+
+
 if u are accessing from the www
 - & if u do not have g++ and make installed; 
 - download the zip file or clone this repository instead;
@@ -30,11 +44,3 @@ make
 
 
 
-if u have access to the usb drive to be passed onto the prof;
-- & if u do not have g++ and make installed;
-- open powershell and run this script:
-
-# for make and g++ to be addedd onto the current path instance of powershell
-$env:Path = "____DRIVE_LETTER____:\group1\w64devkit\bin;$env:Path";
-cd "____DRIVE_LETTER____:\group1\smashbuton-raylib-main\build\"
-make
