@@ -17,6 +17,7 @@ external tools used:
 	- raylib (for handling key inputs, window managemnet[for graphics and sounds])
 	- gnu-make (scripting for building and compiling the game)
 	- youtube songs (for resources)
+	- git (for version control and code base management; https://github.com/Jeo0/smashbuton-raylib.git)
 
 
 realizations:
