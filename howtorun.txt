@@ -1,5 +1,8 @@
 how to run;
-proceed on running either of the exectuable inside "smashbuton-raylib-main/build/run/" folder
+	- make sure to lowerdown the volume
+	- proceed on running either of the exectuable inside "smashbuton-raylib-main/build/run/" folder
+	- (debug is for a version that makes it easier to debug)
+	- (release is for a version that wont show any warnings/slight errors to the end-user)
 
 
 
@@ -15,8 +18,8 @@ steps how to compile and build the project:
 
 FOR MAM RHIA:
 if u have access to the usb drive to be passed onto the prof;
-- & if u do not have g++ and make installed;
-- open powershell and paste this script:
+	- & if u do not have g++ and make installed;
+	- open powershell and paste this script:
 
 # for make and g++ to be addedd onto the current path instance of powershell
 $env:Path = "____DRIVE_LETTER____:\group1\w64devkit\bin;$env:Path";

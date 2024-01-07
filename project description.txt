@@ -1,0 +1,29 @@
+
+Group 1:
+	- Barbosa, Ryan
+	- Guarino, Jessie
+	- Hanley, Paul
+	- Luzon, Joshua
+	- Verzon, Ralph
+
+
+project description:
+	- two player game (WASD vs IJKL)
+	- combine 2 numbers to equate the given number at the middle -- repeatedly, until the other player loses health
+	- first to 5 points wins
+
+
+external tools used:
+	- raylib (for handling key inputs, window managemnet[for graphics and sounds])
+	- gnu-make (scripting for building and compiling the game)
+	- youtube songs (for resources)
+
+
+realizations:
+	- mid-development, we somehow lost track of every tokens being utilized as conventions and rules in naming things arent standardized. Other features werent also implemented kasi grrr nakakatamad hehehe. So by going through all the mess, and just bearing with and compiling it all seems reasonable rather than refactoring the whole codebase given the time constraints that we have for the exams (& motivations).
+	- this is our first time handling programs with the ui shown graphically, and not just your typical command line interface. It was really fun and quite stressful.
+	- real thanks to raysan and the community for making raylib, and as well as mam rhia for providing an opportunity and giving us the push that we need.
+
+
+
+
