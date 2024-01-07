@@ -1,5 +1,5 @@
-CFLAGS = -Wall -Wno-missing-braces -std=c++17
-LINKFLAGS = -lraylib -lopengl32 -lgdi32 -lwinmm
+CFLAGS = -Wall -Wno-missing-braces -std=c++17 
+LINKFLAGS = -lraylib -lopengl32 -lgdi32 -lwinmm 
 BUILD_MODE ?= DEBUG
 ifeq ($(BUILD_MODE), DEBUG)
     CFLAGS += -g -O0 
@@ -31,7 +31,7 @@ default:	# debug mode
 
 release:	# release mode
 	g++ "src/*.cpp" -o run/main_release.exe\
-		-Wall -Wno-missing-braces -std=c++17 -s -O1 \
+		-mwindows -Wall -Wno-missing-braces -std=c++17 -s -O1 \
 		-I include \
 		-L lib \
 		$(LINKFLAGS)

@@ -24,7 +24,7 @@ void Modes::DrawPogisijessie(){
 
     DrawTextEx(GetFontDefault(), 
         TextFormat(text, pogisijessie), 
-        {GetScreenWidth()/2 - (text_dim.x/2.5),
+        {(float)(GetScreenWidth()/2 - (text_dim.x/2.5)),
         ((float)(GetScreenHeight()*0.1)  - (text_dim.y/2))},
         size, spacing, BLACK);
     //DrawText(TextFormat("%i", pogisijessie), GetScreenWidth()/2, GetScreenHeight() * 0.1, 100, BLUE);
@@ -34,8 +34,8 @@ void Modes::GenerateNew_numbers(){
     // generate numbers
     leftPlayer.addends1 = pogisijessie - GetRandomValue(MINPOGISIJESSIE+1, pogisijessie-2);
     leftPlayer.addends2 = pogisijessie - leftPlayer.addends1;
-    leftPlayer.useless1 = GetRandomValue(leftPlayer.addends1+1, leftPlayer.addends2+1);
-    leftPlayer.useless2 = GetRandomValue(leftPlayer.useless1+1, leftPlayer.addends2+2);
+    leftPlayer.useless1 = GetRandomValue(leftPlayer.addends1+1, leftPlayer.addends2-1);
+    leftPlayer.useless2 = GetRandomValue(leftPlayer.useless1+1, leftPlayer.addends2-2);
 
     rightPlayer.addends1 = leftPlayer.addends1;
     rightPlayer.addends2 = leftPlayer.addends2;
